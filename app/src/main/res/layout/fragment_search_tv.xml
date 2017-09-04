@@ -1,0 +1,17 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sicheng.smart_tv.fragments.SearchTVFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <SearchView
+        android:id="@+id/keywords"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:queryHint="请输入搜索关键字" />
+
+</FrameLayout>
