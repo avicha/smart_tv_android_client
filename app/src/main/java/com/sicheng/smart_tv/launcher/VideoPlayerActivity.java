@@ -43,6 +43,11 @@ public class VideoPlayerActivity extends Activity {
         ArrayList<TV> added_playlist = intent.getParcelableArrayListExtra("playlist");
         current = playlist.size();
         playlist.addAll(added_playlist);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         this.play(this.current);
     }
 

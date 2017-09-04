@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,9 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class SearchTVFragment extends Fragment {
 
     private SearchView searchView;
-    private final String API_URL = "http://192.168.23.183:8888";
-    private TVService tvService;
-
+    private TVService.TVServiceInterface tvService = TVService.getInstance();
     private OnFragmentInteractionListener mListener;
 
     public SearchTVFragment() {
@@ -57,7 +53,6 @@ public class SearchTVFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
 
@@ -67,13 +62,14 @@ public class SearchTVFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_tv, container, false);
         this.searchView = view.findViewById(R.id.keywords);
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(this.API_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        this.tvService = retrofit.create(TVService.class);
         initEvent();
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        this.searchView.clearFocus();
     }
 
     private void initEvent() {

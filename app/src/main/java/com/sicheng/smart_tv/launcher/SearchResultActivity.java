@@ -85,27 +85,29 @@ public class SearchResultActivity extends Activity implements SearchTVFragment.O
         this.fragmentTvListText.setText(getString(R.string.fragment_tv_list_text) + "(" + totalRows + "个搜索结果)");
         this.TVListFragment.setTVs(tvs);
     }
-}
 
-class CustomImageDownaloder extends BaseImageDownloader {
+    private final class CustomImageDownaloder extends BaseImageDownloader {
 
-    public CustomImageDownaloder(Context context) {
-        super(context);
-    }
-
-    public CustomImageDownaloder(Context context, int connectTimeout, int readTimeout) {
-        super(context, connectTimeout, readTimeout);
-    }
-
-    @Override
-    protected HttpURLConnection createConnection(String url, Object extra) throws IOException {
-        HttpURLConnection conn = super.createConnection(url, extra);
-        Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
-        headers.put("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36");
-        for (Map.Entry<String, String> header : headers.entrySet()) {
-            conn.setRequestProperty(header.getKey(), header.getValue());
+        public CustomImageDownaloder(Context context) {
+            super(context);
         }
-        return conn;
+
+        public CustomImageDownaloder(Context context, int connectTimeout, int readTimeout) {
+            super(context, connectTimeout, readTimeout);
+        }
+
+        @Override
+        protected HttpURLConnection createConnection(String url, Object extra) throws IOException {
+            HttpURLConnection conn = super.createConnection(url, extra);
+            Map<String, String> headers = new HashMap<String, String>();
+            headers.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
+            headers.put("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36");
+            for (Map.Entry<String, String> header : headers.entrySet()) {
+                conn.setRequestProperty(header.getKey(), header.getValue());
+            }
+            return conn;
+        }
     }
 }
+
+
