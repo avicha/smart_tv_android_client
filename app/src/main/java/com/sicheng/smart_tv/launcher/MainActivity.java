@@ -23,12 +23,14 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.menuList = findViewById(R.id.menu_list);
+        //设置菜单列表
         final ArrayList<Menu> menuList = new ArrayList<Menu>();
         Menu menu1 = new Menu("电视剧", TVActivity.class);
         menu1.setBackgroundColor(Color.argb(127, 255, 255, 0));
         menuList.add(menu1);
         MenuAdapter menuAdapter = new MenuAdapter(getApplicationContext(), menuList);
         this.menuList.setAdapter(menuAdapter);
+        //点击菜单时跳到相应到页面
         this.menuList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
