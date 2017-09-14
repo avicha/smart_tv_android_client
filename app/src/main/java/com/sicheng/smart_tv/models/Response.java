@@ -5,6 +5,10 @@ package com.sicheng.smart_tv.models;
  */
 
 public class Response<T> {
+    private String errcode;
+    private String errmsg;
+    private T result;
+
     public String getErrcode() {
         return errcode;
     }
@@ -12,8 +16,6 @@ public class Response<T> {
     public void setErrcode(String errcode) {
         this.errcode = errcode;
     }
-
-    private String errcode;
 
     public String getErrmsg() {
         return errmsg;
@@ -23,8 +25,6 @@ public class Response<T> {
         this.errmsg = errmsg;
     }
 
-    private String errmsg;
-
     public T getResult() {
         return result;
     }
@@ -33,5 +33,5 @@ public class Response<T> {
         this.result = result;
     }
 
-    private T result;
+
 }

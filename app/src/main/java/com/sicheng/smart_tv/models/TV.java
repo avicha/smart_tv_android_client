@@ -12,6 +12,10 @@ import java.util.ArrayList;
 public class TV implements Parcelable {
     private String _id;
     private String name;
+    private String folder;
+    private int part_count;
+    private ArrayList<String> actors;
+    private ArrayList<Resource> resources;
 
     public String get_id() {
         return _id;
@@ -60,11 +64,6 @@ public class TV implements Parcelable {
     public void setResources(ArrayList<Resource> resources) {
         this.resources = resources;
     }
-
-    private String folder;
-    private int part_count;
-    private ArrayList<String> actors;
-    private ArrayList<Resource> resources;
 
 
     protected TV(Parcel in) {

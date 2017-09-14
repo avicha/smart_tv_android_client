@@ -1,11 +1,17 @@
 package com.sicheng.smart_tv.models;
 
 import java.util.ArrayList;
+
 /**
  * Created by av on 2017/8/13.
  */
 
 public class ListResponse<T extends Object> {
+    private String errcode;
+    private String errmsg;
+    private int total_rows;
+    private ArrayList<T> result;
+
     public String getErrcode() {
         return errcode;
     }
@@ -38,8 +44,5 @@ public class ListResponse<T extends Object> {
         this.result = result;
     }
 
-    private String errcode;
-    private String errmsg;
-    private int total_rows;
-    private ArrayList<T> result;
+
 }

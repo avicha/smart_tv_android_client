@@ -6,129 +6,14 @@
     android:layout_height="match_parent"
     tools:context="com.sicheng.smart_tv.launcher.MainActivity">
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/status_bar"
+    <fragment
+        android:id="@+id/status_bar_fragment"
+        android:name="com.sicheng.smart_tv.fragments.StatusBarFragment"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#212121"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_status_bar" />
 
-        <RelativeLayout
-            android:id="@+id/status_left_panel"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:paddingLeft="25dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/weather"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="晴天"
-                android:textColor="#fff"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/temperature"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="35dp"
-                android:layout_toRightOf="@+id/weather"
-                android:gravity="center"
-                android:text="35℃"
-                android:textColor="#fff"
-                android:textSize="20sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/status_center_panel"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/time"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="23:18"
-                android:textColor="#fff"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/time"
-                android:gravity="center"
-                android:paddingTop="15dp"
-                android:text="09-08"
-                android:textColor="#fff"
-                android:textSize="8sp" />
-
-            <TextView
-                android:id="@+id/day_of_week"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_toRightOf="@+id/time"
-                android:gravity="center"
-                android:paddingBottom="15dp"
-                android:text="六"
-                android:textColor="#fff"
-                android:textSize="8sp" />
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/status_right_panel"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="30dp"
-            android:layout_marginRight="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/avatar"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/avatar_blank" />
-
-            <TextView
-                android:id="@+id/username"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_toRightOf="@+id/avatar"
-                android:gravity="center"
-                android:text="Avicha"
-                android:textColor="#fff"
-                android:textSize="20sp" />
-        </RelativeLayout>
-    </android.support.constraint.ConstraintLayout>
-
-    <GridView
-        android:id="@+id/menu_list"
-        android:layout_width="576dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:horizontalSpacing="10dp"
-        android:numColumns="6"
-        android:verticalSpacing="10dp"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
 </android.support.constraint.ConstraintLayout>

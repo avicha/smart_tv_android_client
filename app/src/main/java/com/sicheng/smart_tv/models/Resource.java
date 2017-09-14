@@ -9,6 +9,13 @@ import android.os.Parcelable;
 
 public class Resource implements Parcelable {
     private String id;
+    private int source;
+    private int status;
+    private int play_count;
+    private boolean is_free;
+    private long created_at;
+    private long updated_at;
+    private long deleted_at;
 
     public String getId() {
         return id;
@@ -74,13 +81,6 @@ public class Resource implements Parcelable {
         this.deleted_at = deleted_at;
     }
 
-    private int source;
-    private int status;
-    private int play_count;
-    private boolean is_free;
-    private long created_at;
-    private long updated_at;
-    private long deleted_at;
 
     protected Resource(Parcel in) {
         id = in.readString();
