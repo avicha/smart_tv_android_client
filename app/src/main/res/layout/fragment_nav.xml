@@ -1,0 +1,24 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    tools:context="com.sicheng.smart_tv.fragments.NavFragment">
+
+    <TextView
+        android:id="@+id/nav"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="#9E9E9E"
+        android:gravity="center"
+        android:paddingBottom="3dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="3dp"
+        android:text=""
+        android:textColor="#f1f1f1"
+        android:textSize="14sp" />
+
+</FrameLayout>

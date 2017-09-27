@@ -159,36 +159,36 @@ public class BaseActivity extends FragmentActivity {
 
 
     public boolean onKeycodeLeftKeyUp(KeyEvent event) {
-        return onKeyUp(KeyEvent.KEYCODE_DPAD_LEFT, event);
+        return super.onKeyUp(KeyEvent.KEYCODE_DPAD_LEFT, event);
     }
 
     public boolean onKeycodeUpKeyUp(KeyEvent event) {
-        return onKeyUp(KeyEvent.KEYCODE_DPAD_UP, event);
+        return super.onKeyUp(KeyEvent.KEYCODE_DPAD_UP, event);
     }
 
     public boolean onKeycodeRightKeyUp(KeyEvent event) {
-        return onKeyUp(KeyEvent.KEYCODE_DPAD_RIGHT, event);
+        return super.onKeyUp(KeyEvent.KEYCODE_DPAD_RIGHT, event);
     }
 
     public boolean onKeycodeDownKeyUp(KeyEvent event) {
-        return onKeyUp(KeyEvent.KEYCODE_DPAD_DOWN, event);
+        return super.onKeyUp(KeyEvent.KEYCODE_DPAD_DOWN, event);
     }
 
     public boolean onKeycodeEnterKeyUp(KeyEvent event) {
-        return onKeyUp(KeyEvent.KEYCODE_DPAD_CENTER, event);
+        return super.onKeyUp(KeyEvent.KEYCODE_DPAD_CENTER, event);
     }
 
     public boolean onKeycodeBackKeyUp(KeyEvent event) {
-        return onKeyUp(KeyEvent.KEYCODE_BACK, event);
+        return super.onKeyUp(KeyEvent.KEYCODE_BACK, event);
     }
 
     public boolean onKeycodeHomeKeyUp(KeyEvent event) {
-        return onKeyUp(KeyEvent.KEYCODE_HOME, event);
+        return super.onKeyUp(KeyEvent.KEYCODE_HOME, event);
     }
 
 
     public boolean onKeycodeMenuKeyUp(KeyEvent event) {
-        return onKeyUp(KeyEvent.KEYCODE_MENU, event);
+        return super.onKeyUp(KeyEvent.KEYCODE_MENU, event);
     }
 
     @Override
@@ -218,35 +218,35 @@ public class BaseActivity extends FragmentActivity {
     }
 
     public boolean onKeycodeLeftLongPress(KeyEvent event) {
-        return onKeyLongPress(KeyEvent.KEYCODE_DPAD_LEFT, event);
+        return super.onKeyLongPress(KeyEvent.KEYCODE_DPAD_LEFT, event);
     }
 
     public boolean onKeycodeUpLongPress(KeyEvent event) {
-        return onKeyLongPress(KeyEvent.KEYCODE_DPAD_UP, event);
+        return super.onKeyLongPress(KeyEvent.KEYCODE_DPAD_UP, event);
     }
 
     public boolean onKeycodeRightLongPress(KeyEvent event) {
-        return onKeyLongPress(KeyEvent.KEYCODE_DPAD_RIGHT, event);
+        return super.onKeyLongPress(KeyEvent.KEYCODE_DPAD_RIGHT, event);
     }
 
     public boolean onKeycodeDownLongPress(KeyEvent event) {
-        return onKeyLongPress(KeyEvent.KEYCODE_DPAD_DOWN, event);
+        return super.onKeyLongPress(KeyEvent.KEYCODE_DPAD_DOWN, event);
     }
 
     public boolean onKeycodeEnterLongPress(KeyEvent event) {
-        return onKeyLongPress(KeyEvent.KEYCODE_DPAD_CENTER, event);
+        return super.onKeyLongPress(KeyEvent.KEYCODE_DPAD_CENTER, event);
     }
 
     public boolean onKeycodeBackLongPress(KeyEvent event) {
-        return onKeyLongPress(KeyEvent.KEYCODE_BACK, event);
+        return super.onKeyLongPress(KeyEvent.KEYCODE_BACK, event);
     }
 
     public boolean onKeycodeHomeLongPress(KeyEvent event) {
-        return onKeyLongPress(KeyEvent.KEYCODE_HOME, event);
+        return super.onKeyLongPress(KeyEvent.KEYCODE_HOME, event);
     }
 
 
     public boolean onKeycodeMenuLongPress(KeyEvent event) {
-        return onKeyUp(KeyEvent.KEYCODE_MENU, event);
+        return super.onKeyLongPress(KeyEvent.KEYCODE_MENU, event);
     }
 }
