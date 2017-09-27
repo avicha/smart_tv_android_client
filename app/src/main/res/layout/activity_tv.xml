@@ -24,7 +24,7 @@
     <fragment
         android:id="@+id/recommended_tv_list_fragment"
         android:name="com.sicheng.smart_tv.fragments.TVListFragment"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.Toast;
 
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
@@ -25,14 +26,8 @@ import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 import com.sicheng.smart_tv.R;
 import com.sicheng.smart_tv.fragments.StatusBarFragment;
-import com.sicheng.smart_tv.models.Response;
-import com.sicheng.smart_tv.models.User;
-import com.sicheng.smart_tv.services.UserService;
 
 import java.io.File;
-
-import retrofit2.Call;
-import retrofit2.Callback;
 
 /**
  * Created by av on 2017/9/7.
@@ -43,7 +38,6 @@ public class BaseActivity extends FragmentActivity {
     protected Toast toast;
     protected WifiManager wifiManager;
     protected BroadcastReceiver supplicantStateChangedBroadcastReceiver;
-    protected UserService.UserServiceInterface userService = UserService.getInstance();
 
 
     @Override
@@ -69,9 +63,6 @@ public class BaseActivity extends FragmentActivity {
     protected void onStart() {
         super.onStart();
         this.statusBarFragment = (StatusBarFragment) getFragmentManager().findFragmentById(R.id.status_bar_fragment);
-        if (this.statusBarFragment != null) {
-            this.getUserStatus();
-        }
     }
 
     @Override
@@ -117,30 +108,6 @@ public class BaseActivity extends FragmentActivity {
         }
     }
 
-    protected void getUserStatus() {
-        Call<Response<User>> call = this.userService.status();
-        call.enqueue(new Callback<Response<User>>() {
-            @Override
-            public void onResponse(Call<Response<User>> call, retrofit2.Response<Response<User>> response) {
-                Response<User> resp = response.body();
-                User user = resp.getResult();
-                handleUserLoaded(user);
-            }
-
-            @Override
-            public void onFailure(Call<Response<User>> call, Throwable t) {
-                Log.e("API:USER_STATUS", call.request().url() + ": failed: " + t);
-            }
-        });
-    }
-
-    protected void handleUserLoaded(User user) {
-        if (user != null) {
-            this.statusBarFragment.setUserInfo(user);
-        } else {
-            this.redirectToLoginActivity();
-        }
-    }
 
     /**
      * 是否wifi连接失败
@@ -163,14 +130,123 @@ public class BaseActivity extends FragmentActivity {
         }
     }
 
-    /**
-     * 重定向到login页面进行用户登录
-     */
-    private void redirectToLoginActivity() {
-        if (!this.getClass().equals(WifiActivity.class)) {
-            Intent intent = new Intent(getApplicationContext(), WifiActivity.class);
-            intent.putExtra("redirect_to", this.getClass().getName());
-            startActivity(intent);
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        Log.i("KeyUp", String.valueOf(keyCode));
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_DPAD_LEFT:
+                return onKeycodeLeftKeyUp(event);
+            case KeyEvent.KEYCODE_DPAD_UP:
+                return onKeycodeUpKeyUp(event);
+            case KeyEvent.KEYCODE_DPAD_RIGHT:
+                return onKeycodeRightKeyUp(event);
+            case KeyEvent.KEYCODE_DPAD_DOWN:
+                return onKeycodeDownKeyUp(event);
+            case KeyEvent.KEYCODE_DPAD_CENTER:
+            case KeyEvent.KEYCODE_ENTER:
+                return onKeycodeEnterKeyUp(event);
+            case KeyEvent.KEYCODE_BACK:
+                return onKeycodeBackKeyUp(event);
+            case KeyEvent.KEYCODE_HOME:
+                return onKeycodeHomeKeyUp(event);
+            case KeyEvent.KEYCODE_MENU:
+                return onKeycodeMenuKeyUp(event);
+            default:
+                return super.onKeyUp(keyCode, event);
         }
+    }
+
+
+    public boolean onKeycodeLeftKeyUp(KeyEvent event) {
+        return onKeyUp(KeyEvent.KEYCODE_DPAD_LEFT, event);
+    }
+
+    public boolean onKeycodeUpKeyUp(KeyEvent event) {
+        return onKeyUp(KeyEvent.KEYCODE_DPAD_UP, event);
+    }
+
+    public boolean onKeycodeRightKeyUp(KeyEvent event) {
+        return onKeyUp(KeyEvent.KEYCODE_DPAD_RIGHT, event);
+    }
+
+    public boolean onKeycodeDownKeyUp(KeyEvent event) {
+        return onKeyUp(KeyEvent.KEYCODE_DPAD_DOWN, event);
+    }
+
+    public boolean onKeycodeEnterKeyUp(KeyEvent event) {
+        return onKeyUp(KeyEvent.KEYCODE_DPAD_CENTER, event);
+    }
+
+    public boolean onKeycodeBackKeyUp(KeyEvent event) {
+        return onKeyUp(KeyEvent.KEYCODE_BACK, event);
+    }
+
+    public boolean onKeycodeHomeKeyUp(KeyEvent event) {
+        return onKeyUp(KeyEvent.KEYCODE_HOME, event);
+    }
+
+
+    public boolean onKeycodeMenuKeyUp(KeyEvent event) {
+        return onKeyUp(KeyEvent.KEYCODE_MENU, event);
+    }
+
+    @Override
+    public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+        Log.i("KeyLongPress", String.valueOf(keyCode));
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_DPAD_LEFT:
+                return onKeycodeLeftLongPress(event);
+            case KeyEvent.KEYCODE_DPAD_UP:
+                return onKeycodeUpLongPress(event);
+            case KeyEvent.KEYCODE_DPAD_RIGHT:
+                return onKeycodeRightLongPress(event);
+            case KeyEvent.KEYCODE_DPAD_DOWN:
+                return onKeycodeDownLongPress(event);
+            case KeyEvent.KEYCODE_DPAD_CENTER:
+            case KeyEvent.KEYCODE_ENTER:
+                return onKeycodeEnterLongPress(event);
+            case KeyEvent.KEYCODE_BACK:
+                return onKeycodeBackLongPress(event);
+            case KeyEvent.KEYCODE_HOME:
+                return onKeycodeHomeLongPress(event);
+            case KeyEvent.KEYCODE_MENU:
+                return onKeycodeMenuLongPress(event);
+            default:
+                return super.onKeyLongPress(keyCode, event);
+        }
+    }
+
+    public boolean onKeycodeLeftLongPress(KeyEvent event) {
+        return onKeyLongPress(KeyEvent.KEYCODE_DPAD_LEFT, event);
+    }
+
+    public boolean onKeycodeUpLongPress(KeyEvent event) {
+        return onKeyLongPress(KeyEvent.KEYCODE_DPAD_UP, event);
+    }
+
+    public boolean onKeycodeRightLongPress(KeyEvent event) {
+        return onKeyLongPress(KeyEvent.KEYCODE_DPAD_RIGHT, event);
+    }
+
+    public boolean onKeycodeDownLongPress(KeyEvent event) {
+        return onKeyLongPress(KeyEvent.KEYCODE_DPAD_DOWN, event);
+    }
+
+    public boolean onKeycodeEnterLongPress(KeyEvent event) {
+        return onKeyLongPress(KeyEvent.KEYCODE_DPAD_CENTER, event);
+    }
+
+    public boolean onKeycodeBackLongPress(KeyEvent event) {
+        return onKeyLongPress(KeyEvent.KEYCODE_BACK, event);
+    }
+
+    public boolean onKeycodeHomeLongPress(KeyEvent event) {
+        return onKeyLongPress(KeyEvent.KEYCODE_HOME, event);
+    }
+
+
+    public boolean onKeycodeMenuLongPress(KeyEvent event) {
+        return onKeyUp(KeyEvent.KEYCODE_MENU, event);
     }
 }

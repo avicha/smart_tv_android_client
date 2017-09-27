@@ -1,7 +1,7 @@
 package com.sicheng.smart_tv.fragments;
 
 import android.app.Fragment;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,10 +14,12 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.sicheng.smart_tv.R;
+import com.sicheng.smart_tv.launcher.WifiActivity;
 import com.sicheng.smart_tv.models.Response;
 import com.sicheng.smart_tv.models.User;
 import com.sicheng.smart_tv.models.Weather;
 import com.sicheng.smart_tv.services.CommonService;
+import com.sicheng.smart_tv.services.UserService;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -30,8 +32,6 @@ import retrofit2.Callback;
 
 /**
  * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link StatusBarFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link StatusBarFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -47,9 +47,9 @@ public class StatusBarFragment extends Fragment {
     private User user = null;
     private long currentTimeMillis = System.currentTimeMillis();
     private Weather weather = null;
-    private OnFragmentInteractionListener mListener;
     private Timer timer;
     private CommonService.CommonServiceInterface commonService = CommonService.getInstance();
+    private UserService.UserServiceInterface userService = UserService.getInstance();
 
 
     public StatusBarFragment() {
@@ -66,11 +66,6 @@ public class StatusBarFragment extends Fragment {
     public static StatusBarFragment newInstance() {
         StatusBarFragment fragment = new StatusBarFragment();
         return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -113,21 +108,11 @@ public class StatusBarFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
         this.setIntervalUpdateTime();
         this.getWeather();
+        this.getUser();
     }
 
     @Override
@@ -153,29 +138,41 @@ public class StatusBarFragment extends Fragment {
         }, 0, 1000);
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    protected void getUser() {
+        Call<Response<User>> call = this.userService.status();
+        call.enqueue(new Callback<Response<User>>() {
+            @Override
+            public void onResponse(Call<Response<User>> call, retrofit2.Response<Response<User>> response) {
+                Response<User> resp = response.body();
+                User user = resp.getResult();
+                handleUserLoaded(user);
+            }
+
+            @Override
+            public void onFailure(Call<Response<User>> call, Throwable t) {
+                Log.e("API:USER_STATUS", call.request().url() + ": failed: " + t);
+            }
+        });
+    }
+
+    protected void handleUserLoaded(User user) {
+        if (user != null) {
+            this.user = user;
+            this.render();
+        } else {
+            this.redirectToLoginActivity();
+        }
     }
 
     /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
+     * 重定向到login页面进行用户登录
      */
-    public interface OnFragmentInteractionListener {
-
-    }
-
-    public void setUserInfo(User user) {
-        this.user = user;
-        this.render();
+    private void redirectToLoginActivity() {
+        if (!this.getActivity().getClass().equals(WifiActivity.class)) {
+            Intent intent = new Intent(getContext(), WifiActivity.class);
+            intent.putExtra("redirect_to", this.getActivity().getClass().getName());
+            startActivity(intent);
+        }
     }
 
     public void getWeather() {
