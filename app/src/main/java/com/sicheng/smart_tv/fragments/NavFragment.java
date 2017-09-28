@@ -3,13 +3,11 @@ package com.sicheng.smart_tv.fragments;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
 
 import com.sicheng.smart_tv.R;
@@ -22,6 +20,7 @@ import com.sicheng.smart_tv.R;
 public class NavFragment extends Fragment {
     private String menu;
     private String page;
+    private int index;
     private TextView navTextView;
     private boolean isActive;
     private OnFragmentInteractionListener mListener;
@@ -38,11 +37,12 @@ public class NavFragment extends Fragment {
      * @return A new instance of fragment NavFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static NavFragment newInstance(String menu, String page) {
+    public static NavFragment newInstance(String menu, String page, int index) {
         NavFragment fragment = new NavFragment();
         Bundle args = new Bundle();
         args.putString("menu", menu);
         args.putString("page", page);
+        args.putInt("index", index);
         fragment.setArguments(args);
         return fragment;
     }
@@ -53,6 +53,7 @@ public class NavFragment extends Fragment {
         if (getArguments() != null) {
             menu = getArguments().getString("menu");
             page = getArguments().getString("page");
+            index = getArguments().getInt("index");
         }
         this.isActive = false;
     }
@@ -62,15 +63,29 @@ public class NavFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_nav, container, false);
-        navTextView = view.findViewById(R.id.nav);
+        this.navTextView = view.findViewById(R.id.nav);
+
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        this.render();
+        this.setupEvents();
+    }
+
+    public void render() {
         navTextView.setText(menu);
-        navTextView.setOnClickListener(new View.OnClickListener() {
+    }
+
+    public void setupEvents() {
+        getView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 handleNavClick();
             }
         });
-        return view;
     }
 
     @Override
@@ -90,28 +105,21 @@ public class NavFragment extends Fragment {
         mListener = null;
     }
 
+
     public void focus() {
         if (!this.isActive) {
-            AnimationSet animationSet = new AnimationSet(true);
-            animationSet.setFillAfter(true);
-            ScaleAnimation scaleAnimation = new ScaleAnimation(1, 1.2f, 1, 1.2f,
-                    Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-            scaleAnimation.setDuration(400);
-            animationSet.addAnimation(scaleAnimation);
-            getView().startAnimation(animationSet);
+            TextView nav = getView().findViewById(R.id.nav);
+            nav.setTextSize(14);
+            getView().setBackgroundColor(Color.parseColor("#77BCAAA4"));
             this.isActive = true;
         }
     }
 
     public void blur() {
         if (this.isActive) {
-            AnimationSet animationSet = new AnimationSet(true);
-            animationSet.setFillAfter(true);
-            ScaleAnimation scaleAnimation = new ScaleAnimation(1.2f, 1, 1.2f, 1,
-                    Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-            scaleAnimation.setDuration(400);
-            animationSet.addAnimation(scaleAnimation);
-            getView().startAnimation(animationSet);
+            TextView nav = getView().findViewById(R.id.nav);
+            nav.setTextSize(12);
+            getView().setBackgroundColor(Color.TRANSPARENT);
             this.isActive = false;
         }
     }

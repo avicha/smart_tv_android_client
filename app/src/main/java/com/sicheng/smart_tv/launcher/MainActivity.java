@@ -1,38 +1,27 @@
 package com.sicheng.smart_tv.launcher;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.widget.LinearLayout;
 
 import com.sicheng.smart_tv.R;
 import com.sicheng.smart_tv.fragments.NavFragment;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.sicheng.smart_tv.fragments.NavbarFragment;
 
 public class MainActivity extends BaseActivity implements NavFragment.OnFragmentInteractionListener {
-    private LinearLayout navBar;
-    private List<String> menuList = Arrays.asList("电视剧", "电影", "综艺", "频道", "直播", "游戏", "足迹");
-    private List<String> pages = Arrays.asList("tv", "movie", "variety", "channel", "live", "game", "history");
-    private List<NavFragment> navFragments;
-    private int currentNav = 0;
+    private NavbarFragment navbarFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.navBar = findViewById(R.id.nav_bar);
-        this.navFragments = new ArrayList<>();
+        this.navbarFragment = (NavbarFragment) getFragmentManager().findFragmentById(R.id.navbar_fragment);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        this.renderNavBar();
+        this.navbarFragment.setCurrentNav(0);
     }
 
     @Override
@@ -44,49 +33,21 @@ public class MainActivity extends BaseActivity implements NavFragment.OnFragment
 
     @Override
     public boolean onKeycodeRightLongPress(KeyEvent event) {
-        this.currentNav = (this.currentNav + 1) % this.menuList.size();
-        this.activeCurrentNav();
+        this.navbarFragment.next();
         return false;
     }
 
     @Override
     public boolean onKeycodeLeftLongPress(KeyEvent event) {
-        this.currentNav = (this.currentNav + this.menuList.size() - 1) % this.menuList.size();
-        this.activeCurrentNav();
+        this.navbarFragment.prev();
         return false;
-    }
-
-    public void renderNavBar() {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        for (int i = 0, len = menuList.size(); i < len; i++) {
-            String menu = menuList.get(i);
-            String page = pages.get(i);
-            NavFragment navFragment = NavFragment.newInstance(menu, page);
-
-            this.navFragments.add(navFragment);
-            fragmentTransaction.add(R.id.nav_bar, navFragment);
-        }
-        fragmentTransaction.commit();
-        fragmentManager.executePendingTransactions();
-        this.activeCurrentNav();
-    }
-
-    public void activeCurrentNav() {
-        for (int i = 0, len = this.navBar.getChildCount(); i < len; i++) {
-            NavFragment navFragment = this.navFragments.get(i);
-            if (i == currentNav) {
-                navFragment.focus();
-            } else {
-                navFragment.blur();
-            }
-        }
-
     }
 
     @Override
     public void onNavClick(String page) {
-        this.currentNav = pages.indexOf(page);
-        this.activeCurrentNav();
+        this.navbarFragment.setCurrentNav(page);
+        switch (page) {
+
+        }
     }
 }

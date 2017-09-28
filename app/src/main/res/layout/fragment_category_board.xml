@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/category_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#424242"
+    android:orientation="vertical"
+    tools:context="com.sicheng.smart_tv.fragments.CategoryBoardFragment">
+
+    <LinearLayout
+        android:id="@+id/category_row1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:weightSum="8"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/category_row2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:weightSum="8"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/category_row3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:weightSum="8"></LinearLayout>
+
+</LinearLayout>

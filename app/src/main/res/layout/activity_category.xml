@@ -16,43 +16,15 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/fragment_status_bar" />
 
-    <LinearLayout
-        android:id="@+id/category_list"
+    <fragment
+        android:id="@+id/category_board_fragment"
+        android:name="com.sicheng.smart_tv.fragments.CategoryBoardFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#424242"
-        android:orientation="vertical"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/status_bar_fragment">
+        app:layout_constraintTop_toBottomOf="@+id/status_bar_fragment" />
 
-        <LinearLayout
-            android:id="@+id/category_row1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="left"
-            android:orientation="horizontal"
-            android:weightSum="8"></LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/category_row2"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="left"
-            android:orientation="horizontal"
-            android:weightSum="8"></LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/category_row3"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="left"
-            android:orientation="horizontal"
-            android:weightSum="8"></LinearLayout>
-    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
