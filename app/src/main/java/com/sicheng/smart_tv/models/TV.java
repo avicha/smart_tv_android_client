@@ -3,8 +3,6 @@ package com.sicheng.smart_tv.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
-
 /**
  * Created by av on 2017/9/3.
  */
@@ -12,77 +10,19 @@ import java.util.ArrayList;
 public class TV implements Parcelable {
     private String _id;
     private String name;
-    private String folder;
-    private int part_count;
-    private ArrayList<String> actors;
-    private ArrayList<Resource> resources;
-
-    public String get_id() {
-        return _id;
-    }
-
-    public void set_id(String _id) {
-        this._id = _id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getFolder() {
-        return folder;
-    }
-
-    public void setFolder(String folder) {
-        this.folder = folder;
-    }
-
-    public int getPart_count() {
-        return part_count;
-    }
-
-    public void setPart_count(int part_count) {
-        this.part_count = part_count;
-    }
-
-    public ArrayList<String> getActors() {
-        return actors;
-    }
-
-    public void setActors(ArrayList<String> actors) {
-        this.actors = actors;
-    }
-
-    public ArrayList<Resource> getResources() {
-        return resources;
-    }
-
-    public void setResources(ArrayList<Resource> resources) {
-        this.resources = resources;
-    }
-
+    private Resource resource;
 
     protected TV(Parcel in) {
         _id = in.readString();
         name = in.readString();
-        folder = in.readString();
-        part_count = in.readInt();
-        actors = in.createStringArrayList();
-        resources = in.createTypedArrayList(Resource.CREATOR);
+        resource = in.readParcelable(Resource.class.getClassLoader());
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(_id);
         dest.writeString(name);
-        dest.writeString(folder);
-        dest.writeInt(part_count);
-        dest.writeStringList(actors);
-        dest.writeTypedList(resources);
+        dest.writeParcelable(resource, flags);
     }
 
     @Override
@@ -101,4 +41,29 @@ public class TV implements Parcelable {
             return new TV[size];
         }
     };
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Resource getResource() {
+        return resource;
+    }
+
+    public void setResource(Resource resource) {
+        this.resource = resource;
+    }
+
 }

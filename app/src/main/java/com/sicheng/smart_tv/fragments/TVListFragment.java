@@ -14,9 +14,16 @@ import android.widget.GridView;
 import com.sicheng.smart_tv.R;
 import com.sicheng.smart_tv.adapters.TVAdapter;
 import com.sicheng.smart_tv.launcher.VideoPlayerActivity;
+import com.sicheng.smart_tv.models.ListResponse;
 import com.sicheng.smart_tv.models.TV;
+import com.sicheng.smart_tv.models.TVQueryParams;
+import com.sicheng.smart_tv.services.TVService;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,8 +34,10 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class TVListFragment extends Fragment {
+    private ArrayList<TV> tvArrayList = new ArrayList<>();
     private GridView gridView;
     private OnFragmentInteractionListener mListener;
+    private TVService.TVServiceInterface tvService = TVService.getInstance();
 
     public TVListFragment() {
         // Required empty public constructor
@@ -57,6 +66,20 @@ public class TVListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tv_list, container, false);
         this.gridView = view.findViewById(R.id.tv_list);
+        TVAdapter TVAdapter = new TVAdapter(getContext(), tvArrayList);
+        this.gridView.setAdapter(TVAdapter);
+        this.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TV tv = tvArrayList.get(i);
+                ArrayList<TV> playlist = new ArrayList<>();
+                playlist.add(tv);
+                Intent intent = new Intent(getContext(), VideoPlayerActivity.class);
+                intent.putParcelableArrayListExtra("playlist", playlist);
+                Log.d("PLAY_TV", "onItemClick: " + tv.getName());
+                getActivity().startActivity(intent);
+            }
+        });
         return view;
     }
 
@@ -91,19 +114,22 @@ public class TVListFragment extends Fragment {
 
     }
 
-    public void setTVs(final ArrayList<TV> tvs) {
-        TVAdapter TVAdapter = new TVAdapter(getContext(), tvs);
-        this.gridView.setAdapter(TVAdapter);
-        this.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    public void load(TVQueryParams tvQueryParams) {
+        Call<ListResponse<TV>> call = this.tvService.search(tvQueryParams.asMap());
+        call.enqueue(new Callback<ListResponse<TV>>() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TV tv = tvs.get(i);
-                ArrayList<TV> playlist = new ArrayList<TV>();
-                playlist.add(tv);
-                Intent intent = new Intent(getContext(), VideoPlayerActivity.class);
-                intent.putParcelableArrayListExtra("playlist", playlist);
-                Log.d("PLAY_TV", "onItemClick: " + tv.getName());
-                getActivity().startActivity(intent);
+            public void onResponse(Call<ListResponse<TV>> call, Response<ListResponse<TV>> response) {
+                ListResponse<TV> resp = response.body();
+                tvArrayList.clear();
+                for (TV tv : resp.getResult()) {
+                    tvArrayList.add(tv);
+                }
+                ((TVAdapter) gridView.getAdapter()).notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<ListResponse<TV>> call, Throwable t) {
+                Log.e("API:TV_SEARCH", call.request().url() + ": failed: " + t);
             }
         });
     }

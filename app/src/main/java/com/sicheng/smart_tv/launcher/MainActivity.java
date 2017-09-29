@@ -23,7 +23,7 @@ public class MainActivity extends BaseActivity implements NavFragment.OnFragment
         super.onStart();
         this.navbarFragment.setCurrentNav(0);
     }
-
+    
     @Override
     public boolean onKeycodeMenuKeyUp(KeyEvent event) {
         Intent intent = new Intent(getApplicationContext(), CategoryActivity.class);

@@ -3,11 +3,14 @@ package com.sicheng.smart_tv.services;
 import com.sicheng.smart_tv.models.ListResponse;
 import com.sicheng.smart_tv.models.TV;
 
+import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 /**
  * Created by av on 2017/8/13.
@@ -17,7 +20,7 @@ public final class TVService {
 
     public static TVServiceInterface getInstance() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8888")
+                .baseUrl(Config.API_HOST)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         TVServiceInterface service = retrofit.create(TVServiceInterface.class);
@@ -26,7 +29,8 @@ public final class TVService {
 
     public interface TVServiceInterface {
         @GET("/api/tv/search")
-        Call<ListResponse<TV>> search(@Query("keywords") String keywords);
+        Call<ListResponse<TV>> search(@QueryMap Map<String, String> filters);
+
         @GET("/api/tv/recommend")
         Call<ListResponse<TV>> recommend(@Query("rows") int rows);
     }

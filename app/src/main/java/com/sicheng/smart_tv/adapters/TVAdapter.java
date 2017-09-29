@@ -49,24 +49,23 @@ public class TVAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder viewHolder = null;
         if (view == null) {
-            view = this.inflater.inflate(R.layout.component_tv_single, viewGroup, false);
+            view = this.inflater.inflate(R.layout.component_tv_single, null);
             viewHolder = new ViewHolder();
             viewHolder.folderView = view.findViewById(R.id.tv_folder);
             viewHolder.nameView = view.findViewById(R.id.tv_name);
             viewHolder.actorsView = view.findViewById(R.id.tv_actors);
             view.setTag(viewHolder);
-
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
         TV tv = (TV) this.getItem(i);
-        String imageUri = tv.getFolder();
+        String imageUri = tv.getResource().getFolder();
         ImageLoader imageLoader = ImageLoader.getInstance(); // Get singleton instance
         // Load image, decode it to Bitmap and return Bitmap to callback
         imageLoader.displayImage(imageUri, viewHolder.folderView);
         viewHolder.nameView.setText(tv.getName());
-        StringBuffer buffer = new StringBuffer("演员：");
-        ArrayList<String> actors = tv.getActors();
+        StringBuffer buffer = new StringBuffer("主演：");
+        ArrayList<String> actors = tv.getResource().getActors();
         buffer.append(actors.get(0) != null ? actors.get(0) : "");
         for (int index = 1, len = actors.size(); i < len; i++) {
             buffer.append(',');

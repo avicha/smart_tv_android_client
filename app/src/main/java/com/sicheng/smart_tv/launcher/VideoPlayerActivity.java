@@ -13,8 +13,6 @@ import com.sicheng.smart_tv.models.Resource;
 import com.sicheng.smart_tv.models.TV;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class VideoPlayerActivity extends Activity {
     private WebView videoPlayer;
@@ -60,30 +58,14 @@ public class VideoPlayerActivity extends Activity {
 
     public void playVideo(TV tv) {
         String url = null;
-        ArrayList<Resource> resources = tv.getResources();
-        Collections.sort(resources, new Comparator<Resource>() {
-            @Override
-            public int compare(Resource a, Resource b) {
-                int wa = (a.is_free() ? 500 : 0) + (a.getStatus() == 1 ? 1000 : (a.getStatus() == 2 ? 800 : 100));
-                int wb = (b.is_free() ? 500 : 0) + (b.getStatus() == 1 ? 1000 : (b.getStatus() == 2 ? 800 : 100));
-                if (wa > wb) {
-                    return 1;
-                } else {
-                    return -1;
-                }
-            }
-        });
-        Resource resource = resources.get(0);
-        if (resource != null) {
-            switch (resource.getSource()) {
-                case 1:
-                    url = "http://v.youku.com/v_show/id_" + resource.getId() + ".html";
-                    break;
-            }
-            if (url != null) {
-                this.videoPlayer.loadUrl(url);
-            }
+        Resource resource = tv.getResource();
+        switch (resource.getSource()) {
+            case 1:
+                url = "http://v.youku.com/v_show/id_" + resource.getId() + ".html";
+                break;
         }
-
+        if (url != null) {
+            this.videoPlayer.loadUrl(url);
+        }
     }
 }

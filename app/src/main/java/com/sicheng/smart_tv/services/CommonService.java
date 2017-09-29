@@ -17,7 +17,7 @@ import retrofit2.http.GET;
 public class CommonService {
     public static CommonServiceInterface getInstance() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8888")
+                .baseUrl(Config.API_HOST)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         CommonServiceInterface service = retrofit.create(CommonServiceInterface.class);

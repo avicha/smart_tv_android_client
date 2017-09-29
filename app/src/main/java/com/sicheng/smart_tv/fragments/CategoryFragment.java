@@ -26,7 +26,6 @@ public class CategoryFragment extends Fragment {
     private String desc;
     private String icon;
     private String type;
-    private int index;
     private ImageView iconImageView;
     private TextView nameTextView;
     private TextView descTextView;
@@ -44,14 +43,13 @@ public class CategoryFragment extends Fragment {
      * @return A new instance of fragment CategoryFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CategoryFragment newInstance(Category category, int index) {
+    public static CategoryFragment newInstance(Category category) {
         CategoryFragment fragment = new CategoryFragment();
         Bundle args = new Bundle();
         args.putString("name", category.getName());
         args.putString("desc", category.getDesc());
         args.putString("icon", category.getIcon());
         args.putString("type", category.getType());
-        args.putInt("index", index);
         fragment.setArguments(args);
         return fragment;
     }
@@ -65,7 +63,6 @@ public class CategoryFragment extends Fragment {
             desc = getArguments().getString("desc");
             icon = getArguments().getString("icon");
             type = getArguments().getString("type");
-            index = getArguments().getInt("index");
         }
     }
 
@@ -77,7 +74,6 @@ public class CategoryFragment extends Fragment {
         this.iconImageView = view.findViewById(R.id.icon);
         this.nameTextView = view.findViewById(R.id.name);
         this.descTextView = view.findViewById(R.id.desc);
-
         return view;
     }
 

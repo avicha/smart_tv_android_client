@@ -40,16 +40,15 @@ public class SearchResultActivity extends BaseActivity implements SearchTVFragme
             Log.d("TV LIST", "tv name:" + tv.getName());
         }
         this.searchTVFragment.setQuery(keywords, false);
-        this.TVListFragment.setTVs(tvs);
+//        this.TVListFragment.load();
     }
-
 
 
     @Override
     public void onFragmentSearch(String keywords, ArrayList<TV> tvs, int totalRows) {
         this.searchTVFragment.setQuery(keywords, false);
         this.fragmentTvListText.setText(getString(R.string.fragment_tv_list_text) + "(" + totalRows + "个搜索结果)");
-        this.TVListFragment.setTVs(tvs);
+//        this.TVListFragment.load();
     }
 
     private final class CustomImageDownaloder extends BaseImageDownloader {

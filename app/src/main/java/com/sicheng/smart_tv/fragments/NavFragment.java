@@ -20,7 +20,6 @@ import com.sicheng.smart_tv.R;
 public class NavFragment extends Fragment {
     private String menu;
     private String page;
-    private int index;
     private TextView navTextView;
     private boolean isActive;
     private OnFragmentInteractionListener mListener;
@@ -37,12 +36,11 @@ public class NavFragment extends Fragment {
      * @return A new instance of fragment NavFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static NavFragment newInstance(String menu, String page, int index) {
+    public static NavFragment newInstance(String menu, String page) {
         NavFragment fragment = new NavFragment();
         Bundle args = new Bundle();
         args.putString("menu", menu);
         args.putString("page", page);
-        args.putInt("index", index);
         fragment.setArguments(args);
         return fragment;
     }
@@ -53,7 +51,6 @@ public class NavFragment extends Fragment {
         if (getArguments() != null) {
             menu = getArguments().getString("menu");
             page = getArguments().getString("page");
-            index = getArguments().getInt("index");
         }
         this.isActive = false;
     }
@@ -125,7 +122,9 @@ public class NavFragment extends Fragment {
     }
 
     protected void handleNavClick() {
-        mListener.onNavClick(this.page);
+        if (mListener != null) {
+            mListener.onNavClick(this.page);
+        }
     }
 
     public interface OnFragmentInteractionListener {

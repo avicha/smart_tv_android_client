@@ -1,17 +1,10 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nav"
+    android:layout_width="100dp"
     android:layout_height="match_parent"
-    tools:context="com.sicheng.smart_tv.fragments.NavFragment">
+    android:gravity="center"
+    android:text=""
+    android:textColor="#f1f1f1"
+    android:textSize="12sp"
+    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/nav"
-        android:layout_width="100dp"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text=""
-        android:textColor="#f1f1f1"
-        android:textSize="12sp"
-        android:textStyle="bold" />
-
-</FrameLayout>

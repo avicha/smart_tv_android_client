@@ -78,7 +78,7 @@ public class CategoryBoardFragment extends Fragment {
             if (row != null) {
                 int viewId = row.getId();
                 Category category = categoryListData.get(i);
-                CategoryFragment categoryFragment = CategoryFragment.newInstance(category, i);
+                CategoryFragment categoryFragment = CategoryFragment.newInstance(category);
                 categoryFragments.add(categoryFragment);
                 fragmentTransaction.add(viewId, categoryFragment);
             }

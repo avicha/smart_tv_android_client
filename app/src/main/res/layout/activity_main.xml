@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#cc2f2721"
+    android:background="@color/colorBody"
     tools:context="com.sicheng.smart_tv.launcher.MainActivity">
 
     <fragment
@@ -21,11 +21,7 @@
         android:id="@+id/navbar_fragment"
         android:name="com.sicheng.smart_tv.fragments.NavbarFragment"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="0dp"
-        android:background="#424242"
+        android:layout_height="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/status_bar_fragment"

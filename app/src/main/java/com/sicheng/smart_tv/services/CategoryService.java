@@ -15,7 +15,7 @@ import retrofit2.http.GET;
 public final class CategoryService {
     public static CategoryServiceInterface getInstance() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8888")
+                .baseUrl(Config.API_HOST)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         CategoryServiceInterface service = retrofit.create(CategoryServiceInterface.class);

@@ -10,15 +10,10 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 
 import com.sicheng.smart_tv.R;
-import com.sicheng.smart_tv.models.ListResponse;
 import com.sicheng.smart_tv.models.TV;
 import com.sicheng.smart_tv.services.TVService;
 
 import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -77,24 +72,24 @@ public class SearchTVFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(final String s) {
                 Log.d("SEARCH_TV", "onQueryTextSubmit: " + s);
-                Call<ListResponse<TV>> call = tvService.search(s);
-                call.enqueue(new Callback<ListResponse<TV>>() {
-                    @Override
-                    public void onResponse(Call<ListResponse<TV>> call, Response<ListResponse<TV>> response) {
-                        ListResponse<TV> resp = response.body();
-                        ArrayList<TV> tvs = resp.getResult();
-                        int totalRows = resp.getTotalRows();
-                        if (mListener != null) {
-                            mListener.onFragmentSearch(s, tvs, totalRows);
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<ListResponse<TV>> call, Throwable t) {
-                        Log.e("SEARCH_TV", call.request().url() + ": failed: " + t);
-                    }
-                });
+//                Call<ListResponse<TV>> call = tvService.search(s);
+//                call.enqueue(new Callback<ListResponse<TV>>() {
+//                    @Override
+//                    public void onResponse(Call<ListResponse<TV>> call, Response<ListResponse<TV>> response) {
+//                        ListResponse<TV> resp = response.body();
+//                        ArrayList<TV> tvs = resp.getResult();
+//                        int totalRows = resp.getTotalRows();
+//                        if (mListener != null) {
+//                            mListener.onFragmentSearch(s, tvs, totalRows);
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<ListResponse<TV>> call, Throwable t) {
+//                        Log.e("SEARCH_TV", call.request().url() + ": failed: " + t);
+//                    }
+//                });
                 return false;
             }
 

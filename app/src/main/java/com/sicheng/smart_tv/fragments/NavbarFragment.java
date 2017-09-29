@@ -62,12 +62,12 @@ public class NavbarFragment extends Fragment {
     }
 
     public void render() {
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         for (int i = 0, len = menuList.size(); i < len; i++) {
             String menu = menuList.get(i);
             String page = pages.get(i);
-            NavFragment navFragment = NavFragment.newInstance(menu, page, i);
+            NavFragment navFragment = NavFragment.newInstance(menu, page);
             this.navFragments.add(navFragment);
             fragmentTransaction.add(R.id.navbar, navFragment);
         }

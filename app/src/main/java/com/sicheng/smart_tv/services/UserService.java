@@ -15,7 +15,7 @@ import retrofit2.http.GET;
 public final class UserService {
     public static UserServiceInterface getInstance() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8888")
+                .baseUrl(Config.API_HOST)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         UserServiceInterface service = retrofit.create(UserServiceInterface.class);
@@ -25,6 +25,7 @@ public final class UserService {
     public interface UserServiceInterface {
         @GET("/api/user/login")
         Call<Response> login();
+
         @GET("/api/user/status")
         Call<Response<User>> status();
     }

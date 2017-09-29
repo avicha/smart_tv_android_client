@@ -23,7 +23,7 @@ public class CategoryActivity extends BaseActivity implements CategoryFragment.O
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
-                return true;
+                return super.onKeyUp(keyCode, event);
             case KeyEvent.KEYCODE_DPAD_LEFT:
             case KeyEvent.KEYCODE_DPAD_UP:
             case KeyEvent.KEYCODE_DPAD_RIGHT:

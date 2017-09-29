@@ -1,19 +1,12 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sicheng.smart_tv.fragments.NavbarFragment">
+    android:background="@color/colorNavbar"
+    android:scrollbars="none">
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:id="@+id/navbar"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:orientation="horizontal"></LinearLayout>
-    </HorizontalScrollView>
-
-</FrameLayout>
+    <LinearLayout
+        android:id="@+id/navbar"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"></LinearLayout>
+</HorizontalScrollView>
