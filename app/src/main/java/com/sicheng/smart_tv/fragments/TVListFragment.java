@@ -1,7 +1,6 @@
 package com.sicheng.smart_tv.fragments;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,13 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.sicheng.smart_tv.R;
 import com.sicheng.smart_tv.adapters.TVAdapter;
 import com.sicheng.smart_tv.launcher.VideoPlayerActivity;
 import com.sicheng.smart_tv.models.ListResponse;
 import com.sicheng.smart_tv.models.TV;
-import com.sicheng.smart_tv.models.TVQueryParams;
+import com.sicheng.smart_tv.models.TVSearchParams;
 import com.sicheng.smart_tv.services.TVService;
 
 import java.util.ArrayList;
@@ -27,16 +27,17 @@ import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link TVListFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link TVListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class TVListFragment extends Fragment {
+    private TVSearchParams tvSearchParams;
     private ArrayList<TV> tvArrayList = new ArrayList<>();
+    private TextView tvHeaderQueryStatusTextView;
     private GridView gridView;
-    private OnFragmentInteractionListener mListener;
+    private boolean isLoading = false;
+    private boolean isEnded = false;
     private TVService.TVServiceInterface tvService = TVService.getInstance();
 
     public TVListFragment() {
@@ -66,6 +67,7 @@ public class TVListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tv_list, container, false);
         this.gridView = view.findViewById(R.id.tv_list);
+        this.tvHeaderQueryStatusTextView = view.findViewById(R.id.tv_header_query_status);
         TVAdapter TVAdapter = new TVAdapter(getContext(), tvArrayList);
         this.gridView.setAdapter(TVAdapter);
         this.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -76,61 +78,61 @@ public class TVListFragment extends Fragment {
                 playlist.add(tv);
                 Intent intent = new Intent(getContext(), VideoPlayerActivity.class);
                 intent.putParcelableArrayListExtra("playlist", playlist);
-                Log.d("PLAY_TV", "onItemClick: " + tv.getName());
                 getActivity().startActivity(intent);
+            }
+        });
+        this.gridView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
+                //倒数第几行开始加载下一页
+                int preRows = 2;
+                if (pos > tvArrayList.size() - preRows * gridView.getNumColumns() && !isLoading && !isEnded) {
+                    loadMore();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
         return view;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+    public void load(TVSearchParams tvSearchParams, boolean isReset) {
+        this.tvSearchParams = tvSearchParams;
+        if (isReset) {
+            this.isEnded = false;
+            tvArrayList.clear();
         }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-
-    }
-
-    public void load(TVQueryParams tvQueryParams) {
-        Call<ListResponse<TV>> call = this.tvService.search(tvQueryParams.asMap());
+//        this.tvHeaderQueryStatusTextView = tvSearchParams.getQueryStatus();
+        Call<ListResponse<TV>> call = this.tvService.search(this.tvSearchParams.asMap());
+        this.isLoading = true;
         call.enqueue(new Callback<ListResponse<TV>>() {
             @Override
             public void onResponse(Call<ListResponse<TV>> call, Response<ListResponse<TV>> response) {
+                isLoading = false;
                 ListResponse<TV> resp = response.body();
-                tvArrayList.clear();
-                for (TV tv : resp.getResult()) {
-                    tvArrayList.add(tv);
+                ArrayList<TV> tvs = resp.getResult();
+                if (tvs.size() == 0) {
+                    isEnded = true;
                 }
+                tvArrayList.addAll(tvs);
                 ((TVAdapter) gridView.getAdapter()).notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(Call<ListResponse<TV>> call, Throwable t) {
+                isLoading = false;
                 Log.e("API:TV_SEARCH", call.request().url() + ": failed: " + t);
             }
         });
+    }
+
+    public void loadMore() {
+        if (this.tvSearchParams != null && !this.isEnded) {
+            this.tvSearchParams.setPage(String.valueOf(Integer.parseInt(this.tvSearchParams.getPage()) + 1));
+            this.load(this.tvSearchParams, false);
+        }
     }
 }

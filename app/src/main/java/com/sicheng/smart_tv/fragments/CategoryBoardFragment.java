@@ -7,7 +7,6 @@ import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +58,7 @@ public class CategoryBoardFragment extends Fragment {
                 ListResponse<Category> resp = response.body();
                 categoryListData = resp.getResult();
                 render();
-                setFocusIndex(0);
+//                setFocusIndex(0);
             }
 
             @Override
@@ -85,7 +84,6 @@ public class CategoryBoardFragment extends Fragment {
         }
         fragmentTransaction.commit();
         fragmentManager.executePendingTransactions();
-
         for (int i = 0, rows = this.categoryListContainer.getChildCount(); i < rows; i++) {
             LinearLayout row = (LinearLayout) this.categoryListContainer.getChildAt(i);
             for (int j = 0, columns = row.getChildCount(); j < columns; j++) {
@@ -100,46 +98,46 @@ public class CategoryBoardFragment extends Fragment {
         }
     }
 
-    public void setFocusIndex(int focusIndex) {
-        this.focusIndex = focusIndex;
-        this.categoryFragments.get(focusIndex).getView().requestFocus();
-    }
+//    public void setFocusIndex(int focusIndex) {
+//        this.focusIndex = focusIndex;
+//        this.categoryFragments.get(focusIndex).getView().requestFocus();
+//    }
+//
+//    public void clickCategory(int focusIndex) {
+//        this.categoryFragments.get(focusIndex).getView().performClick();
+//    }
 
-    public void clickCategory(int focusIndex) {
-        this.categoryFragments.get(focusIndex).getView().performClick();
-    }
-
-    public void move(int keyCode) {
-        int row = (int) Math.floor(focusIndex / countPerRow);
-        int column = focusIndex % countPerRow;
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_DPAD_LEFT:
-                if (column > 0) {
-                    column--;
-                }
-                break;
-            case KeyEvent.KEYCODE_DPAD_UP:
-                if (row > 0) {
-                    row--;
-                }
-                break;
-            case KeyEvent.KEYCODE_DPAD_RIGHT:
-                if (column < countPerRow - 1) {
-                    column++;
-                }
-                break;
-            case KeyEvent.KEYCODE_DPAD_DOWN:
-                if (row < totalRows - 1) {
-                    row++;
-                }
-                break;
-            case KeyEvent.KEYCODE_DPAD_CENTER:
-                this.clickCategory(focusIndex);
-                break;
-        }
-        int index = row * countPerRow + column;
-        if (categoryListData.get(index) != null && index != focusIndex) {
-            setFocusIndex(index);
-        }
-    }
+//    public void move(int keyCode) {
+//        int row = (int) Math.floor(focusIndex / countPerRow);
+//        int column = focusIndex % countPerRow;
+//        switch (keyCode) {
+//            case KeyEvent.KEYCODE_DPAD_LEFT:
+//                if (column > 0) {
+//                    column--;
+//                }
+//                break;
+//            case KeyEvent.KEYCODE_DPAD_UP:
+//                if (row > 0) {
+//                    row--;
+//                }
+//                break;
+//            case KeyEvent.KEYCODE_DPAD_RIGHT:
+//                if (column < countPerRow - 1) {
+//                    column++;
+//                }
+//                break;
+//            case KeyEvent.KEYCODE_DPAD_DOWN:
+//                if (row < totalRows - 1) {
+//                    row++;
+//                }
+//                break;
+//            case KeyEvent.KEYCODE_DPAD_CENTER:
+//                this.clickCategory(focusIndex);
+//                break;
+//        }
+//        int index = row * countPerRow + column;
+//        if (categoryListData.get(index) != null && index != focusIndex) {
+//            setFocusIndex(index);
+//        }
+//    }
 }

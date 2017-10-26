@@ -1,0 +1,17 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tv_search_option_board"
+    android:visibility="gone"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorNavbar"
+    android:translationZ="100dp"
+    android:orientation="vertical"
+    tools:context="com.sicheng.smart_tv.fragments.TVSearchOptionBoardFragment">
+
+    <TableLayout
+        android:id="@+id/tv_search_options_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </TableLayout>
+</LinearLayout>

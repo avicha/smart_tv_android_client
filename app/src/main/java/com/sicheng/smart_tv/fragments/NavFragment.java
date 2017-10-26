@@ -61,7 +61,6 @@ public class NavFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_nav, container, false);
         this.navTextView = view.findViewById(R.id.nav);
-
         return view;
     }
 

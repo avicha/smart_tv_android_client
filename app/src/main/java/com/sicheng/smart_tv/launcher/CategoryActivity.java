@@ -2,7 +2,6 @@ package com.sicheng.smart_tv.launcher;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 
 import com.sicheng.smart_tv.R;
 import com.sicheng.smart_tv.fragments.CategoryBoardFragment;
@@ -19,21 +18,21 @@ public class CategoryActivity extends BaseActivity implements CategoryFragment.O
         this.categoryBoardFragment = (CategoryBoardFragment) getFragmentManager().findFragmentById(R.id.category_board_fragment);
     }
 
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_BACK:
-                return super.onKeyUp(keyCode, event);
-            case KeyEvent.KEYCODE_DPAD_LEFT:
-            case KeyEvent.KEYCODE_DPAD_UP:
-            case KeyEvent.KEYCODE_DPAD_RIGHT:
-            case KeyEvent.KEYCODE_DPAD_DOWN:
-            case KeyEvent.KEYCODE_DPAD_CENTER:
-                this.categoryBoardFragment.move(keyCode);
-                break;
-        }
-        return false;
-    }
+//    @Override
+//    public boolean onKeyUp(int keyCode, KeyEvent event) {
+//        switch (keyCode) {
+//            case KeyEvent.KEYCODE_BACK:
+//                return super.onKeyUp(keyCode, event);
+//            case KeyEvent.KEYCODE_DPAD_LEFT:
+//            case KeyEvent.KEYCODE_DPAD_UP:
+//            case KeyEvent.KEYCODE_DPAD_RIGHT:
+//            case KeyEvent.KEYCODE_DPAD_DOWN:
+//            case KeyEvent.KEYCODE_DPAD_CENTER:
+//                this.categoryBoardFragment.move(keyCode);
+//                break;
+//        }
+//        return false;
+//    }
 
     @Override
     public void onCategorySelected(String type) {

@@ -143,7 +143,6 @@ public class CategoryFragment extends Fragment {
         if (mListener != null) {
             mListener.onCategorySelected(type);
         }
-
     }
 
     public interface OnFragmentInteractionListener {

@@ -66,7 +66,7 @@ public class TVAdapter extends BaseAdapter {
         viewHolder.nameView.setText(tv.getName());
         StringBuffer buffer = new StringBuffer("主演：");
         ArrayList<String> actors = tv.getResource().getActors();
-        buffer.append(actors.get(0) != null ? actors.get(0) : "");
+        buffer.append(actors.size() != 0 ? actors.get(0) : "");
         for (int index = 1, len = actors.size(); i < len; i++) {
             buffer.append(',');
             buffer.append(actors.get(index));

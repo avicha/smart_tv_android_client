@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SearchResultActivity extends BaseActivity implements SearchTVFragment.OnFragmentInteractionListener, TVListFragment.OnFragmentInteractionListener {
+public class SearchResultActivity extends BaseActivity implements SearchTVFragment.OnFragmentInteractionListener {
     private SearchTVFragment searchTVFragment;
     private TextView fragmentTvListText;
     private TVListFragment TVListFragment;

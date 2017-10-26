@@ -3,8 +3,9 @@
     android:layout_width="100dp"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:focusable="false"
     android:text=""
-    android:textColor="#f1f1f1"
+    android:textColor="@color/colorWhite"
     android:textSize="12sp"
     android:textStyle="bold" />
 

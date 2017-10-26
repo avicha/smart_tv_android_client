@@ -1,7 +1,5 @@
 package com.sicheng.smart_tv.services;
 
-import com.sicheng.smart_tv.models.Category;
-import com.sicheng.smart_tv.models.ListResponse;
 import com.sicheng.smart_tv.models.Response;
 import com.sicheng.smart_tv.models.Weather;
 
@@ -30,8 +28,5 @@ public class CommonService {
 
         @GET("/api/common/weather")
         Call<Response<Weather>> weather();
-
-        @GET("/api/common/category_list")
-        Call<ListResponse<Category>> category_list();
     }
 }
