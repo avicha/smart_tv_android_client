@@ -88,6 +88,9 @@ public class CategoryBoardFragment extends Fragment {
             LinearLayout row = (LinearLayout) this.categoryListContainer.getChildAt(i);
             for (int j = 0, columns = row.getChildCount(); j < columns; j++) {
                 LinearLayout ceil = (LinearLayout) row.getChildAt(j);
+                if (i == 0 && j == 0) {
+                    ceil.requestFocus();
+                }
                 if (j == 0) {
                     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT);
                     lp.weight = 2;

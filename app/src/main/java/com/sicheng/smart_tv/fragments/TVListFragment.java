@@ -9,11 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.TextView;
 
 import com.sicheng.smart_tv.R;
 import com.sicheng.smart_tv.adapters.TVAdapter;
-import com.sicheng.smart_tv.launcher.VideoPlayerActivity;
+import com.sicheng.smart_tv.launcher.TVDetailActivity;
 import com.sicheng.smart_tv.models.ListResponse;
 import com.sicheng.smart_tv.models.TV;
 import com.sicheng.smart_tv.models.TVSearchParams;
@@ -34,7 +33,6 @@ import retrofit2.Response;
 public class TVListFragment extends Fragment {
     private TVSearchParams tvSearchParams;
     private ArrayList<TV> tvArrayList = new ArrayList<>();
-    private TextView tvHeaderQueryStatusTextView;
     private GridView gridView;
     private boolean isLoading = false;
     private boolean isEnded = false;
@@ -67,17 +65,14 @@ public class TVListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tv_list, container, false);
         this.gridView = view.findViewById(R.id.tv_list);
-        this.tvHeaderQueryStatusTextView = view.findViewById(R.id.tv_header_query_status);
         TVAdapter TVAdapter = new TVAdapter(getContext(), tvArrayList);
         this.gridView.setAdapter(TVAdapter);
         this.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TV tv = tvArrayList.get(i);
-                ArrayList<TV> playlist = new ArrayList<>();
-                playlist.add(tv);
-                Intent intent = new Intent(getContext(), VideoPlayerActivity.class);
-                intent.putParcelableArrayListExtra("playlist", playlist);
+                Intent intent = new Intent(getContext(), TVDetailActivity.class);
+                intent.putExtra("tv", tv);
                 getActivity().startActivity(intent);
             }
         });
@@ -105,7 +100,6 @@ public class TVListFragment extends Fragment {
             this.isEnded = false;
             tvArrayList.clear();
         }
-//        this.tvHeaderQueryStatusTextView = tvSearchParams.getQueryStatus();
         Call<ListResponse<TV>> call = this.tvService.search(this.tvSearchParams.asMap());
         this.isLoading = true;
         call.enqueue(new Callback<ListResponse<TV>>() {

@@ -33,16 +33,57 @@ public class Resource implements Parcelable {
         return status;
     }
 
-    public ArrayList<String> getAlias() {
-        return alias;
+    public String getAlias() {
+        if (alias != null) {
+            StringBuffer buffer = new StringBuffer("");
+            buffer.append(alias.size() != 0 ? alias.get(0) : "");
+            for (int index = 1, len = alias.size(); index < len; index++) {
+                buffer.append('，');
+                buffer.append(alias.get(index));
+            }
+            return buffer.toString();
+        } else {
+            return "";
+        }
+    }
+
+    public String getStatusText() {
+        String text;
+        switch (status) {
+            case 1:
+                text = part_count + "集完结";
+                break;
+            case 2:
+                text = "更新至第" + current_part + "集，共" + part_count + "集";
+                if (!this.getUpdate_notify_desc().equals("")) {
+                    text += "(" + this.getUpdate_notify_desc() + ")";
+                }
+                break;
+            case 3:
+                text = "预告片";
+                break;
+            default:
+                text = "未知";
+        }
+        return text;
     }
 
     public String getFolder() {
         return folder;
     }
 
-    public ArrayList<String> getActors() {
-        return actors;
+    public String getActors() {
+        if (actors != null) {
+            StringBuffer buffer = new StringBuffer("");
+            buffer.append(actors.size() != 0 ? actors.get(0) : "");
+            for (int index = 1, len = actors.size(); index < len; index++) {
+                buffer.append('，');
+                buffer.append(actors.get(index));
+            }
+            return buffer.toString();
+        } else {
+            return "";
+        }
     }
 
     public int getPlay_count() {
@@ -50,7 +91,7 @@ public class Resource implements Parcelable {
     }
 
     public String getPublish_date() {
-        return publish_date;
+        return publish_date == null ? "" : publish_date;
     }
 
     public boolean is_vip() {
@@ -62,7 +103,7 @@ public class Resource implements Parcelable {
     }
 
     public String getUpdate_notify_desc() {
-        return update_notify_desc;
+        return update_notify_desc == null ? "" : update_notify_desc;
     }
 
     public int getCurrent_part() {
@@ -74,19 +115,29 @@ public class Resource implements Parcelable {
     }
 
     public String getDesc() {
-        return desc;
+        return desc == null ? "" : desc;
     }
 
     public String getRegion() {
-        return region;
+        return region == null ? "" : region;
     }
 
-    public ArrayList<String> getTypes() {
-        return types;
+    public String getTypes() {
+        if (types != null) {
+            StringBuffer buffer = new StringBuffer("");
+            buffer.append(types.size() != 0 ? types.get(0) : "");
+            for (int index = 1, len = types.size(); index < len; index++) {
+                buffer.append('，');
+                buffer.append(types.get(index));
+            }
+            return buffer.toString();
+        } else {
+            return "";
+        }
     }
 
     public String getDirector() {
-        return director;
+        return director == null ? "" : director;
     }
 
     public long getCreated_at() {

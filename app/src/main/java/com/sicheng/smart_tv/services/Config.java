@@ -5,5 +5,5 @@ package com.sicheng.smart_tv.services;
  */
 
 public class Config {
-    public static String API_HOST = "http://10.0.2.2:8888";
+    public static String API_HOST = "http://119.23.127.94";
 }

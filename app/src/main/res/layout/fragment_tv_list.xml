@@ -1,4 +1,4 @@
-<GridView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sicheng.smart_tv.custom_views.NoScrollGridView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tv_list"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

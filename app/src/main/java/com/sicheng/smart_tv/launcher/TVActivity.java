@@ -2,6 +2,7 @@ package com.sicheng.smart_tv.launcher;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.widget.TextView;
 
 import com.sicheng.smart_tv.R;
 import com.sicheng.smart_tv.fragments.TVListFragment;
@@ -11,6 +12,7 @@ import com.sicheng.smart_tv.models.TVSearchParams;
 public class TVActivity extends BaseActivity {
     private TVListFragment tvListFragment;
     private TVSearchOptionBoardFragment tvSearchOptionBoardFragment;
+    private TextView tvHeaderSearchStatusTextView;
     private TVSearchParams tvSearchParams = new TVSearchParams();
     private boolean isSearching = false;
 
@@ -19,12 +21,8 @@ public class TVActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tv);
         this.tvSearchOptionBoardFragment = (TVSearchOptionBoardFragment) getFragmentManager().findFragmentById(R.id.tv_search_option_board_fragment);
+        this.tvHeaderSearchStatusTextView = findViewById(R.id.tv_header_search_status);
         this.tvListFragment = (TVListFragment) getFragmentManager().findFragmentById(R.id.tv_list_fragment);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
         tvSearchParams.setKeywords("");
         tvSearchParams.setType("-1");
         tvSearchParams.setYears("");

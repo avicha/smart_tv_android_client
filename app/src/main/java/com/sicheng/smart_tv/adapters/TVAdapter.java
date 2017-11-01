@@ -22,7 +22,7 @@ public class TVAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private Context ctx;
     private ArrayList<TV> tvs;
-
+    private ImageLoader imageLoader = ImageLoader.getInstance();
 
     public TVAdapter(Context context, ArrayList<TV> tvs) {
         this.ctx = context;
@@ -60,18 +60,10 @@ public class TVAdapter extends BaseAdapter {
         }
         TV tv = (TV) this.getItem(i);
         String imageUri = tv.getResource().getFolder();
-        ImageLoader imageLoader = ImageLoader.getInstance(); // Get singleton instance
-        // Load image, decode it to Bitmap and return Bitmap to callback
+
         imageLoader.displayImage(imageUri, viewHolder.folderView);
         viewHolder.nameView.setText(tv.getName());
-        StringBuffer buffer = new StringBuffer("主演：");
-        ArrayList<String> actors = tv.getResource().getActors();
-        buffer.append(actors.size() != 0 ? actors.get(0) : "");
-        for (int index = 1, len = actors.size(); i < len; i++) {
-            buffer.append(',');
-            buffer.append(actors.get(index));
-        }
-        viewHolder.actorsView.setText(buffer);
+        viewHolder.actorsView.setText("主演：" + tv.getResource().getActors());
         return view;
     }
 

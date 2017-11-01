@@ -141,5 +141,4 @@ public class TVSearchParams implements Parcelable {
         map.put("rows", rows);
         return map;
     }
-
 }
