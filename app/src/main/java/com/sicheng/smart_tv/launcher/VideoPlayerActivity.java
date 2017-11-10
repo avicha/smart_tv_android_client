@@ -75,7 +75,7 @@ public class VideoPlayerActivity extends Activity {
         switch (video.getSource()) {
             case 1:
                 webSettings.setUserAgentString("Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/6");
-                url = "http://m.youku.com/video/id_" + video.getId() + ".html";
+                url = "http://m.youku.com/video/id_" + video.getVideo_id() + ".html";
                 break;
             case 2:
                 webSettings.setUserAgentString("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36");

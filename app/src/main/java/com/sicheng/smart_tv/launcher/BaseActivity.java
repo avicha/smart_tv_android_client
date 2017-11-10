@@ -133,7 +133,8 @@ public class BaseActivity extends FragmentActivity {
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
-        Log.i("KeyUp", String.valueOf(keyCode));
+        this.toast.setText("你按下了" + String.valueOf(keyCode) + "按键");
+        this.toast.show();
         switch (keyCode) {
             case KeyEvent.KEYCODE_DPAD_LEFT:
                 return onKeycodeLeftKeyUp(event);

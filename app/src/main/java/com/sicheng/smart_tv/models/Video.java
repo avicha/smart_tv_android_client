@@ -115,7 +115,7 @@ public class Video implements Parcelable {
     private String padZero(String value, int len) {
         StringBuffer stringBuffer = new StringBuffer(value);
         while (stringBuffer.length() < len) {
-            stringBuffer.append("0", 0, 1);
+            stringBuffer.insert(0, "0");
         }
         return stringBuffer.toString();
     }
@@ -131,7 +131,7 @@ public class Video implements Parcelable {
                 return padZero(String.valueOf(minute), 2) + ":" + padZero(String.valueOf(second), 2);
             } else {
                 if (second != 0) {
-                    return padZero(String.valueOf(second), 2);
+                    return "00：" + padZero(String.valueOf(second), 2);
                 } else {
                     return "";
                 }

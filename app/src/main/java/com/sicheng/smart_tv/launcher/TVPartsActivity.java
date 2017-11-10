@@ -24,6 +24,19 @@ public class TVPartsActivity extends Activity {
         this.tvPartsGridView = findViewById(R.id.tv_parts);
         Intent intent = getIntent();
         this.videos = intent.getParcelableArrayListExtra("playlist");
+        if(this.videos.size()>0){
+            Video video = this.videos.get(0);
+            switch (video.getViewType()){
+                case 1:
+                    this.tvPartsGridView.setNumColumns(GridView.AUTO_FIT);
+                    this.tvPartsGridView.setColumnWidth((int)(40 * getResources().getDisplayMetrics().density));
+                    break;
+                case 2:
+                    this.tvPartsGridView.setNumColumns(4);
+                    break;
+            }
+
+        }
         TVPartAdapter tvPartAdapter = new TVPartAdapter(getApplicationContext(), this.videos);
         this.tvPartsGridView.setAdapter(tvPartAdapter);
         this.tvPartsGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

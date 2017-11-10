@@ -4,6 +4,7 @@
     <color name="colorStatusBar">#212121</color>
     <color name="colorNavbar">#424242</color>
     <color name="colorWhite">#f1f1f1</color>
+    <color name="colorRed">#eb3643</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
