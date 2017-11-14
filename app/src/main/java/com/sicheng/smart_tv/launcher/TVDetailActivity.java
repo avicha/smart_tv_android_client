@@ -78,6 +78,7 @@ public class TVDetailActivity extends BaseActivity {
         this.region.setText(this.tv.getResource().getRegion());
         this.types.setText(this.tv.getResource().getTypes());
         this.desc.setText(this.tv.getResource().getDesc());
+        this.play.requestFocus();
     }
 
     public void initEvents() {

@@ -63,6 +63,7 @@ public class TVActivity extends BaseActivity {
     public boolean onKeycodeBackKeyUp(KeyEvent event) {
         if (this.isSearching) {
             this.tvSearchOptionBoardFragment.hide();
+            this.tvListFragment.getView().setFocusable(true);
             this.isSearching = false;
             return false;
         }

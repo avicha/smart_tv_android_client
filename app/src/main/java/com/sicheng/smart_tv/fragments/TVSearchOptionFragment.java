@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -30,6 +31,7 @@ public class TVSearchOptionFragment extends Fragment {
 
     private TextView label;
     private LinearLayout options;
+    private View selectedValueDom;
 
     public TVSearchOptionFragment() {
         // Required empty public constructor
@@ -69,6 +71,8 @@ public class TVSearchOptionFragment extends Fragment {
         this.label = view.findViewById(R.id.label);
         this.options = view.findViewById(R.id.options);
         this.label.setText(this.search_option.getText());
+        System.out.println(this.search_option.getText());
+        System.out.println(this.search_option.getValues());
         for (SearchOption.SearchOptionValue searchOptionValue : this.search_option.getValues()) {
             TextView textView = new TextView(getContext());
             textView.setTag(searchOptionValue.getValue());
@@ -79,6 +83,9 @@ public class TVSearchOptionFragment extends Fragment {
             textView.setGravity(Gravity.CENTER);
             textView.setPadding(20, 0, 20, 0);
             textView.setText(searchOptionValue.getText());
+            FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.MATCH_PARENT);
+            lp.setMargins(10, 0, 10, 0);
+            textView.setLayoutParams(lp);
             textView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
@@ -108,11 +115,16 @@ public class TVSearchOptionFragment extends Fragment {
             String val = searchOptionValue.getValue();
             if (val.equals(value)) {
                 this.value = value;
-                this.options.getChildAt(i).setBackgroundColor(Color.parseColor("#77BCAAA4"));
+                this.selectedValueDom = this.options.getChildAt(i);
+                this.selectedValueDom.setBackgroundColor(Color.parseColor("#77BCAAA4"));
             } else {
                 this.options.getChildAt(i).setBackgroundColor(Color.parseColor("#00000000"));
             }
         }
+    }
+
+    public void focusSelectedValue() {
+        this.selectedValueDom.requestFocus();
     }
 
     public void changeSelectedValue() {
