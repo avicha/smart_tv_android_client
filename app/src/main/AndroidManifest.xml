@@ -19,17 +19,15 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".launcher.MainActivity"
-            android:screenOrientation="landscape">
-
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".launcher.TVActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".launcher.SearchResultActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".launcher.VideoPlayerActivity"
+            android:name=".launcher.WebVideoPlayerActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".launcher.WifiActivity"
@@ -48,7 +46,8 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".launcher.TVPartsActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
+        <activity android:name=".launcher.VideoPlayerActivity"></activity>
     </application>
 
 </manifest>

@@ -35,7 +35,6 @@ public class TVPartsActivity extends Activity {
                     this.tvPartsGridView.setNumColumns(4);
                     break;
             }
-
         }
         TVPartAdapter tvPartAdapter = new TVPartAdapter(getApplicationContext(), this.videos);
         this.tvPartsGridView.setAdapter(tvPartAdapter);
@@ -46,7 +45,7 @@ public class TVPartsActivity extends Activity {
                 for (int index = i, len = videos.size(); index < len; index++) {
                     playlist.add(videos.get(index));
                 }
-                Intent intent = new Intent(getApplicationContext(), VideoPlayerActivity.class);
+                Intent intent = new Intent(getApplicationContext(), WebVideoPlayerActivity.class);
                 intent.putParcelableArrayListExtra("playlist", playlist);
                 startActivity(intent);
             }
