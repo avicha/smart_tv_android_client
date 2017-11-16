@@ -85,7 +85,7 @@ public class TVDetailActivity extends BaseActivity {
         this.play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), WebVideoPlayerActivity.class);
+                Intent intent = new Intent(getApplicationContext(), VideoPlayerActivity.class);
                 intent.putParcelableArrayListExtra("playlist", videos);
                 startActivity(intent);
             }
