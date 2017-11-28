@@ -3,26 +3,41 @@ package com.sicheng.smart_tv.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
-
 /**
  * Created by av on 2017/11/16.
  */
 
 public class VideoPlayInfo implements Parcelable {
-    private Video next;
-    private Video previous;
-    private ArrayList<VideoType> playlist;
+    private int width;
+    private int height;
+    private String type;
+    private String type_text;
+    private String lang;
+    private String lang_text;
+    private String url;
+    private int weight;
 
     protected VideoPlayInfo(Parcel in) {
-        next = in.readParcelable(Video.class.getClassLoader());
-        previous = in.readParcelable(Video.class.getClassLoader());
+        width = in.readInt();
+        height = in.readInt();
+        type = in.readString();
+        type_text = in.readString();
+        lang = in.readString();
+        lang_text = in.readString();
+        url = in.readString();
+        weight = in.readInt();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(next, flags);
-        dest.writeParcelable(previous, flags);
+        dest.writeInt(width);
+        dest.writeInt(height);
+        dest.writeString(type);
+        dest.writeString(type_text);
+        dest.writeString(lang);
+        dest.writeString(lang_text);
+        dest.writeString(url);
+        dest.writeInt(weight);
     }
 
     @Override
@@ -42,103 +57,67 @@ public class VideoPlayInfo implements Parcelable {
         }
     };
 
-    public Video getNext() {
-        return next;
+    public int getWidth() {
+        return width;
     }
 
-    public void setNext(Video next) {
-        this.next = next;
+    public void setWidth(int width) {
+        this.width = width;
     }
 
-    public Video getPrevious() {
-        return previous;
+    public int getHeight() {
+        return height;
     }
 
-    public void setPrevious(Video previous) {
-        this.previous = previous;
+    public void setHeight(int height) {
+        this.height = height;
     }
 
-    public ArrayList<VideoType> getPlaylist() {
-        return playlist;
+    public String getType() {
+        return type;
     }
 
-    public void setPlaylist(ArrayList<VideoType> playlist) {
-        this.playlist = playlist;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public static class VideoType {
-        private int duration;
-        private int width;
-        private int height;
-        private String type;
-        private String lang;
-        private String url;
-
-        public int getDuration() {
-            return duration;
-        }
-
-        public void setDuration(int duration) {
-            this.duration = duration;
-        }
-
-        public int getWidth() {
-            return width;
-        }
-
-        public void setWidth(int width) {
-            this.width = width;
-        }
-
-        public int getHeight() {
-            return height;
-        }
-
-        public void setHeight(int height) {
-            this.height = height;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public String getLang() {
-            return lang;
-        }
-
-        public void setLang(String lang) {
-            this.lang = lang;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
+    public String getType_text() {
+        return type_text;
     }
 
-    public VideoType getDefaultPlayVideoType() {
-        VideoType defaultPlayVideoType = null;
-        for (VideoType videoType : this.getPlaylist()) {
-            if (videoType.getType().equals("mp4hd2")) {
-                return videoType;
-            } else {
-                if (defaultPlayVideoType == null) {
-                    defaultPlayVideoType = videoType;
-                } else {
-                    if (videoType.getType().equals("mp4hd") && defaultPlayVideoType.getType().equals("mp4sd")) {
-                        defaultPlayVideoType = videoType;
-                    }
+    public void setType_text(String type_text) {
+        this.type_text = type_text;
+    }
 
-                }
-            }
-        }
-        return defaultPlayVideoType;
+    public String getLang() {
+        return lang;
+    }
+
+    public void setLang(String lang) {
+        this.lang = lang;
+    }
+
+    public String getLang_text() {
+        return lang_text;
+    }
+
+    public void setLang_text(String lang_text) {
+        this.lang_text = lang_text;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 }

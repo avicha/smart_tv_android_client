@@ -2,10 +2,9 @@
     android:id="@+id/nav"
     android:layout_width="100dp"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:focusable="false"
+    android:gravity="center"
     android:text=""
     android:textColor="@color/colorWhite"
     android:textSize="12sp"
     android:textStyle="bold" />
-

@@ -79,7 +79,6 @@
             android:textSize="8sp" />
     </RelativeLayout>
 
-
     <RelativeLayout
         android:id="@+id/status_right_panel"
         android:layout_width="wrap_content"

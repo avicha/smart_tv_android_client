@@ -35,7 +35,7 @@
         android:layout_height="200dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:background="@drawable/tv_part_index_bg"
+        android:background="@drawable/tv_video_sequence_bg"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scan_wifi_status"></ListView>

@@ -8,21 +8,22 @@ import android.os.Parcelable;
  */
 
 public class Video implements Parcelable {
-    private String id;
+    private String _id;
+    private String album_id;
     private int source;
-    private int status;
-    private int index;
-    private String thumb;
     private String video_id;
+    private int status;
+    private int sequence;
+    private String thumb;
     private String brief;
     private int duration;
     private String desc;
 
     protected Video(Parcel in) {
-        id = in.readString();
+        album_id = in.readString();
         source = in.readInt();
         status = in.readInt();
-        index = in.readInt();
+        sequence = in.readInt();
         thumb = in.readString();
         video_id = in.readString();
         brief = in.readString();
@@ -32,10 +33,10 @@ public class Video implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
+        dest.writeString(album_id);
         dest.writeInt(source);
         dest.writeInt(status);
-        dest.writeInt(index);
+        dest.writeInt(sequence);
         dest.writeString(thumb);
         dest.writeString(video_id);
         dest.writeString(brief);
@@ -60,12 +61,20 @@ public class Video implements Parcelable {
         }
     };
 
-    public String getId() {
-        return id;
+    public String get_id() {
+        return _id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void set_id(String _id) {
+        this._id = _id;
+    }
+
+    public String getAlbum_id() {
+        return album_id;
+    }
+
+    public void setAlbum_id(String album_id) {
+        this.album_id = album_id;
     }
 
     public int getSource() {
@@ -84,12 +93,12 @@ public class Video implements Parcelable {
         this.status = status;
     }
 
-    public int getIndex() {
-        return index;
+    public int getSequence() {
+        return sequence;
     }
 
-    public void setIndex(int index) {
-        this.index = index;
+    public void setSequence(int sequence) {
+        this.sequence = sequence;
     }
 
     public String getThumb() {

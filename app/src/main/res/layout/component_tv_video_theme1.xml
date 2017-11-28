@@ -5,11 +5,11 @@
     android:layout_height="50dp">
 
     <TextView
-        android:id="@+id/tv_part_index"
+        android:id="@+id/tv_video_index"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_margin="5dp"
-        android:background="@drawable/tv_part_index_bg"
+        android:background="@drawable/tv_video_sequence_bg"
         android:gravity="center"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,10 +18,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_part_vip"
+        android:id="@+id/tv_video_vip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/tv_part_corner"
+        android:background="@drawable/tv_video_corner"
         android:includeFontPadding="false"
         android:text="VIP"
         android:padding="2dp"
@@ -32,10 +32,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_part_preview"
+        android:id="@+id/tv_video_preview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/tv_part_corner"
+        android:background="@drawable/tv_video_corner"
         android:includeFontPadding="false"
         android:text="预"
         android:padding="2dp"

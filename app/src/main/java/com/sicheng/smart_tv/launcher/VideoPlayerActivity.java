@@ -9,7 +9,7 @@ import android.view.SurfaceView;
 import com.alivc.player.AliVcMediaPlayer;
 import com.alivc.player.MediaPlayer;
 import com.sicheng.smart_tv.R;
-import com.sicheng.smart_tv.models.Response;
+import com.sicheng.smart_tv.models.ListResponse;
 import com.sicheng.smart_tv.models.Video;
 import com.sicheng.smart_tv.models.VideoPlayInfo;
 import com.sicheng.smart_tv.services.VideoService;
@@ -31,7 +31,7 @@ public class VideoPlayerActivity extends BaseActivity {
 
     private VideoService.VideoServiceInterface videoService = VideoService.getInstance();
 
-    private VideoPlayInfo videoPlayInfo;
+    private ArrayList<VideoPlayInfo> videoPlayInfoArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +65,11 @@ public class VideoPlayerActivity extends BaseActivity {
         player = new AliVcMediaPlayer(this, surfaceView);
         player.setVideoScalingMode(MediaPlayer.VideoScalingMode.VIDEO_SCALING_MODE_SCALE_TO_FIT);
         player.setDefaultDecoder(0);
-        player.enableNativeLog();
-
         player.setPreparedListener(new MediaPlayer.MediaPlayerPreparedListener() {
             @Override
             public void onPrepared() {
-                toast.setText("准备就绪");
+                String msg = "准备就绪，宽：" + player.getVideoWidth() + "，高：" + player.getVideoHeight() + "，时长：" + (player.getDuration() / 1000 / 60) + "s";
+                toast.setText(msg);
                 toast.show();
             }
         });
@@ -104,33 +103,23 @@ public class VideoPlayerActivity extends BaseActivity {
     }
 
     public void playVideo(Video video) {
-        Call<Response<VideoPlayInfo>> call = videoService.get_play_info(video.getVideo_id(), video.getSource());
-        call.enqueue(new Callback<Response<VideoPlayInfo>>() {
+        Call<ListResponse<VideoPlayInfo>> call = videoService.get_play_info(video.getAlbum_id(), video.getVideo_id(), video.getSource());
+        call.enqueue(new Callback<ListResponse<VideoPlayInfo>>() {
             @Override
-            public void onResponse(Call<Response<VideoPlayInfo>> call, retrofit2.Response<Response<VideoPlayInfo>> response) {
-                Response<VideoPlayInfo> resp = response.body();
-                videoPlayInfo = resp.getResult();
-                VideoPlayInfo.VideoType videoType = videoPlayInfo.getDefaultPlayVideoType();
-                if (videoType != null) {
-                    player.prepareAndPlay(videoType.getUrl());
+            public void onResponse(Call<ListResponse<VideoPlayInfo>> call, retrofit2.Response<ListResponse<VideoPlayInfo>> response) {
+                ListResponse<VideoPlayInfo> resp = response.body();
+                videoPlayInfoArrayList = resp.getResult();
+                if (videoPlayInfoArrayList.size() > 0) {
+                    VideoPlayInfo videoPlayInfo = videoPlayInfoArrayList.get(0);
+                    player.prepareAndPlay(videoPlayInfo.getUrl());
                 }
-
             }
 
             @Override
-            public void onFailure(Call<Response<VideoPlayInfo>> call, Throwable t) {
+            public void onFailure(Call<ListResponse<VideoPlayInfo>> call, Throwable t) {
                 Log.e("API:VIDEO_PLAY", call.request().url() + ": failed: " + t);
             }
         });
-    }
-
-
-    //播放
-    private void play() {
-        if (player != null) {
-            player.prepareAndPlay("https://pl-ali.youku.com/playlist/m3u8?vid=XMjg4MTUwNjE0OA%3D%3D&type=mp4hd2v3&ups_client_netip=78ec94a9&ups_ts=1510802221&utid=HLwAEYVFXmECAXFcg5HlXZrB&ccode=0501&psid=08109470d7a808f64ef2b3f482b74a11&duration=2668&expire=18000&ups_key=58fc01d416261b88f97649196250dfec"
-            );
-        }
     }
 
     //暂停播放
@@ -158,7 +147,8 @@ public class VideoPlayerActivity extends BaseActivity {
     //重头播放
     private void replay() {
         stop();
-        play();
+        Video video = playlist.get(current);
+        playVideo(video);
     }
 
     //保留播放状态

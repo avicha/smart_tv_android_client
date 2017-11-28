@@ -18,13 +18,13 @@ import java.util.ArrayList;
  * Created by av on 2017/11/1.
  */
 
-public class TVPartAdapter extends BaseAdapter {
+public class TVVideoAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private Context ctx;
     private ArrayList<Video> videos = new ArrayList<>();
     private ImageLoader imageLoader = ImageLoader.getInstance();
 
-    public TVPartAdapter(Context context, ArrayList<Video> videos) {
+    public TVVideoAdapter(Context context, ArrayList<Video> videos) {
         this.ctx = context;
         this.videos = videos;
         this.inflater = LayoutInflater.from(this.ctx);
@@ -52,20 +52,20 @@ public class TVPartAdapter extends BaseAdapter {
         if (view == null) {
             switch (video.getViewType()) {
                 case 1:
-                    view = this.inflater.inflate(R.layout.component_tv_part_theme1, null);
+                    view = this.inflater.inflate(R.layout.component_tv_video_theme1, null);
                     viewHolder = new ViewHolder();
-                    viewHolder.indexView = view.findViewById(R.id.tv_part_index);
-                    viewHolder.vipView = view.findViewById(R.id.tv_part_vip);
-                    viewHolder.previewView = view.findViewById(R.id.tv_part_preview);
+                    viewHolder.indexView = view.findViewById(R.id.tv_video_index);
+                    viewHolder.vipView = view.findViewById(R.id.tv_video_vip);
+                    viewHolder.previewView = view.findViewById(R.id.tv_video_preview);
                     break;
                 case 2:
-                    view = this.inflater.inflate(R.layout.component_tv_part_theme2, null);
+                    view = this.inflater.inflate(R.layout.component_tv_video_theme2, null);
                     viewHolder = new ViewHolder();
-                    viewHolder.thumbView = view.findViewById(R.id.tv_part_thumb);
-                    viewHolder.vipView = view.findViewById(R.id.tv_part_vip);
-                    viewHolder.previewView = view.findViewById(R.id.tv_part_preview);
-                    viewHolder.briefView = view.findViewById(R.id.tv_part_brief);
-                    viewHolder.durationView = view.findViewById(R.id.tv_part_duration);
+                    viewHolder.thumbView = view.findViewById(R.id.tv_video_thumb);
+                    viewHolder.vipView = view.findViewById(R.id.tv_video_vip);
+                    viewHolder.previewView = view.findViewById(R.id.tv_video_preview);
+                    viewHolder.briefView = view.findViewById(R.id.tv_video_brief);
+                    viewHolder.durationView = view.findViewById(R.id.tv_video_duration);
                     break;
             }
             view.setTag(viewHolder);
@@ -74,7 +74,7 @@ public class TVPartAdapter extends BaseAdapter {
         }
         switch (video.getViewType()) {
             case 1:
-                viewHolder.indexView.setText(String.valueOf(video.getIndex()));
+                viewHolder.indexView.setText(String.valueOf(video.getSequence()));
                 switch (video.getStatus()) {
                     case 2:
                         viewHolder.vipView.setVisibility(View.VISIBLE);
@@ -103,7 +103,7 @@ public class TVPartAdapter extends BaseAdapter {
                 } else {
                     viewHolder.briefView.setVisibility(View.GONE);
                 }
-                viewHolder.durationView.setText("第" + video.getIndex() + "集  " + video.getDurationString());
+                viewHolder.durationView.setText("第" + video.getSequence() + "集  " + video.getDurationString());
                 break;
         }
         return view;

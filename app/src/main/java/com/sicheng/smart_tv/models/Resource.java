@@ -10,9 +10,16 @@ import java.util.ArrayList;
  */
 
 public class Resource implements Parcelable {
-    private String id;
+    private String album_id;
     private int source;
     private int status;
+    private String update_notify_desc;
+    private int current_part;
+    private int part_count;
+    private String desc;
+    private String region;
+    private ArrayList<String> types;
+    private String director;
     private ArrayList<String> alias;
     private String folder;
     private ArrayList<String> actors;
@@ -20,9 +27,12 @@ public class Resource implements Parcelable {
     private String publish_date;
     private boolean is_vip;
     private float score;
+    private long created_at;
+    private long updated_at;
+    private long deleted_at;
 
-    public String getId() {
-        return id;
+    public String getAlbum_id() {
+        return album_id;
     }
 
     public int getSource() {
@@ -152,19 +162,10 @@ public class Resource implements Parcelable {
         return deleted_at;
     }
 
-    private String update_notify_desc;
-    private int current_part;
-    private int part_count;
-    private String desc;
-    private String region;
-    private ArrayList<String> types;
-    private String director;
-    private long created_at;
-    private long updated_at;
-    private long deleted_at;
+
 
     protected Resource(Parcel in) {
-        id = in.readString();
+        album_id = in.readString();
         source = in.readInt();
         status = in.readInt();
         alias = in.createStringArrayList();
@@ -188,7 +189,7 @@ public class Resource implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
+        dest.writeString(album_id);
         dest.writeInt(source);
         dest.writeInt(status);
         dest.writeStringList(alias);

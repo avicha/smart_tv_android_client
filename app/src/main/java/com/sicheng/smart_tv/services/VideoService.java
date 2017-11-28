@@ -1,6 +1,6 @@
 package com.sicheng.smart_tv.services;
 
-import com.sicheng.smart_tv.models.Response;
+import com.sicheng.smart_tv.models.ListResponse;
 import com.sicheng.smart_tv.models.VideoPlayInfo;
 
 import retrofit2.Call;
@@ -27,6 +27,6 @@ public final class VideoService {
     public interface VideoServiceInterface {
 
         @GET("/api/video/get_play_info")
-        Call<Response<VideoPlayInfo>> get_play_info(@Query("video_id") String video_id, @Query("source") int source);
+        Call<ListResponse<VideoPlayInfo>> get_play_info(@Query("album_id") String album_id, @Query("video_id") String video_id, @Query("source") int source);
     }
 }

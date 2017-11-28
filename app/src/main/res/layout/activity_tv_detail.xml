@@ -64,19 +64,36 @@
                         android:textColor="@color/colorWhite"
                         android:textSize="32sp" />
 
-                    <Button
+                    <RelativeLayout
                         android:id="@+id/tv_play"
-                        android:layout_width="100dp"
-                        android:layout_height="32dp"
-                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:background="#77cccccc"
-                        android:drawableLeft="@android:drawable/ic_media_play"
                         android:focusable="true"
+                        android:gravity="center"
+                        android:paddingBottom="4dp"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:text="播放"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorWhite" />
+                        android:paddingTop="4dp">
+
+                        <ImageView
+                            android:id="@+id/tv_play_icon"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@android:drawable/ic_media_play" />
+
+                        <TextView
+                            android:id="@+id/tv_play_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_toRightOf="@+id/tv_play_icon"
+                            android:text="播放"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+
                 </LinearLayout>
 
                 <LinearLayout

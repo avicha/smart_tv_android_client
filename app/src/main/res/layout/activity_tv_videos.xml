@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBody"
-    tools:context="com.sicheng.smart_tv.launcher.TVPartsActivity">
+    tools:context="com.sicheng.smart_tv.launcher.TVVideosActivity">
 
     <fragment
         android:id="@+id/status_bar_fragment"
@@ -18,7 +18,7 @@
         tools:layout="@layout/fragment_status_bar" />
 
     <FrameLayout
-        android:id="@+id/tv_parts_text"
+        android:id="@+id/tv_videos_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -36,7 +36,7 @@
     </FrameLayout>
 
     <GridView
-        android:id="@+id/tv_parts"
+        android:id="@+id/tv_videos"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:horizontalSpacing="10dp"
@@ -47,6 +47,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_parts_text" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_videos_text" />
 
 </android.support.constraint.ConstraintLayout>

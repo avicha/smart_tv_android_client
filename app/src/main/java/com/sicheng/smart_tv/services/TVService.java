@@ -38,9 +38,9 @@ public final class TVService {
         Call<ListResponse<SearchOption>> getSearchOptions();
 
         @GET("/api/tv/get_detail")
-        Call<Response<TV>> get_detail(@Query("id") String id, @Query("source") int source);
+        Call<Response<TV>> get_detail(@Query("album_id") String album_id, @Query("source") int source);
 
-        @GET("/api/tv/get_parts")
-        Call<ListResponse<Video>> get_parts(@Query("id") String id, @Query("source") int source);
+        @GET("/api/tv/get_videos")
+        Call<ListResponse<Video>> get_videos(@Query("album_id") String album_id, @Query("source") int source);
     }
 }

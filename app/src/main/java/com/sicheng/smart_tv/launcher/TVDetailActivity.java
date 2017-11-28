@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -32,7 +32,8 @@ public class TVDetailActivity extends BaseActivity {
     private TextView region;
     private TextView types;
     private TextView desc;
-    private Button play;
+    private RelativeLayout play;
+    private ImageView play_icon;
     private TV tv;
     private ArrayList<Video> videos;
     private TVService.TVServiceInterface tvService = TVService.getInstance();
@@ -51,6 +52,7 @@ public class TVDetailActivity extends BaseActivity {
         this.types = findViewById(R.id.tv_types);
         this.desc = findViewById(R.id.tv_desc);
         this.play = findViewById(R.id.tv_play);
+        this.play_icon = findViewById(R.id.tv_play_icon);
         this.initEvents();
     }
 
@@ -62,7 +64,7 @@ public class TVDetailActivity extends BaseActivity {
         this.videos = null;
         this.render();
         this.fetchDetail();
-        this.fetchParts();
+        this.fetchVideos();
     }
 
     public void render() {
@@ -78,6 +80,17 @@ public class TVDetailActivity extends BaseActivity {
         this.region.setText(this.tv.getResource().getRegion());
         this.types.setText(this.tv.getResource().getTypes());
         this.desc.setText(this.tv.getResource().getDesc());
+        switch (this.tv.getResource().getSource()) {
+            case 1:
+                this.play_icon.setImageResource(R.mipmap.youku_logo);
+                break;
+            case 2:
+                this.play_icon.setImageResource(R.mipmap.vqq_logo);
+                break;
+            case 3:
+                this.play_icon.setImageResource(R.mipmap.iqiyi_logo);
+                break;
+        }
         this.play.requestFocus();
     }
 
@@ -94,14 +107,14 @@ public class TVDetailActivity extends BaseActivity {
 
     @Override
     public boolean onKeycodeMenuKeyUp(KeyEvent event) {
-        Intent intent = new Intent(getApplicationContext(), TVPartsActivity.class);
+        Intent intent = new Intent(getApplicationContext(), TVVideosActivity.class);
         intent.putParcelableArrayListExtra("playlist", videos);
         startActivity(intent);
         return false;
     }
 
     public void fetchDetail() {
-        Call<Response<TV>> call = tvService.get_detail(this.tv.getResource().getId(), this.tv.getResource().getSource());
+        Call<Response<TV>> call = tvService.get_detail(this.tv.getResource().getAlbum_id(), this.tv.getResource().getSource());
         call.enqueue(new Callback<Response<TV>>() {
             @Override
             public void onResponse(Call<Response<TV>> call, retrofit2.Response<Response<TV>> response) {
@@ -117,8 +130,8 @@ public class TVDetailActivity extends BaseActivity {
         });
     }
 
-    public void fetchParts() {
-        Call<ListResponse<Video>> call = tvService.get_parts(this.tv.getResource().getId(), this.tv.getResource().getSource());
+    public void fetchVideos() {
+        Call<ListResponse<Video>> call = tvService.get_videos(this.tv.getResource().getAlbum_id(), this.tv.getResource().getSource());
         call.enqueue(new Callback<ListResponse<Video>>() {
             @Override
             public void onResponse(Call<ListResponse<Video>> call, retrofit2.Response<ListResponse<Video>> response) {
@@ -128,7 +141,7 @@ public class TVDetailActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<ListResponse<Video>> call, Throwable t) {
-                Log.e("API:TV_PARTS", call.request().url() + ": failed: " + t);
+                Log.e("API:TV_VIDEOS", call.request().url() + ": failed: " + t);
             }
         });
     }

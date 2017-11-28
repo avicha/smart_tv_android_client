@@ -31,5 +31,4 @@
         android:gravity="left"
         android:orientation="horizontal"
         android:weightSum="8"></LinearLayout>
-
 </LinearLayout>

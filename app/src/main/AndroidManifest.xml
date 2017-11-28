@@ -25,15 +25,17 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".launcher.MainActivity"
-            android:screenOrientation="landscape"></activity>
-        <activity
-            android:name=".launcher.TVActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".launcher.TVActivity"
+            android:screenOrientation="landscape">
+
         </activity>
 
         <activity
@@ -54,7 +56,7 @@
             android:name=".launcher.TVDetailActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".launcher.TVPartsActivity"
+            android:name=".launcher.TVVideosActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".launcher.VideoPlayerActivity"

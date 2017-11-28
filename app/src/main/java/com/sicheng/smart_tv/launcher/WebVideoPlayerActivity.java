@@ -133,7 +133,7 @@ public class WebVideoPlayerActivity extends Activity {
                 break;
             case 2:
                 webSettings.setUserAgentString("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36");
-                url = "http://jx.maoyun.tv/index.php?id=https://v.qq.com/x/cover/" + video.getId() + "/" + video.getVideo_id() + ".html";
+                url = "http://jx.maoyun.tv/index.php?id=https://v.qq.com/x/cover/" + video.getAlbum_id() + "/" + video.getVideo_id() + ".html";
                 break;
             case 3:
                 webSettings.setUserAgentString("Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/6");

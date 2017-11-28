@@ -10,7 +10,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/tv_part_thumb"
+            android:id="@+id/tv_video_thumb"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:scaleType="fitXY"
@@ -19,37 +19,37 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_part_vip"
+            android:id="@+id/tv_video_vip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:background="@drawable/tv_part_corner"
+            android:background="@drawable/tv_video_corner"
             android:includeFontPadding="false"
             android:padding="2dp"
             android:text="VIP"
             android:textColor="@color/colorWhite"
             android:textSize="14sp"
             android:visibility="gone"
-            app:layout_constraintRight_toRightOf="@id/tv_part_thumb"
-            app:layout_constraintTop_toTopOf="@id/tv_part_thumb" />
+            app:layout_constraintRight_toRightOf="@id/tv_video_thumb"
+            app:layout_constraintTop_toTopOf="@id/tv_video_thumb" />
 
         <TextView
-            android:id="@+id/tv_part_preview"
+            android:id="@+id/tv_video_preview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:background="@drawable/tv_part_corner"
+            android:background="@drawable/tv_video_corner"
             android:includeFontPadding="false"
             android:padding="2dp"
             android:text="预告"
             android:textColor="@color/colorWhite"
             android:textSize="14sp"
             android:visibility="gone"
-            app:layout_constraintRight_toRightOf="@id/tv_part_thumb"
-            app:layout_constraintTop_toTopOf="@id/tv_part_thumb" />
+            app:layout_constraintRight_toRightOf="@id/tv_video_thumb"
+            app:layout_constraintTop_toTopOf="@id/tv_video_thumb" />
 
         <TextView
-            android:id="@+id/tv_part_duration"
+            android:id="@+id/tv_video_duration"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="#dd000000"
@@ -58,14 +58,14 @@
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_part_thumb"
-            app:layout_constraintLeft_toLeftOf="@+id/tv_part_thumb"
-            app:layout_constraintRight_toRightOf="@+id/tv_part_thumb" />
+            app:layout_constraintBottom_toBottomOf="@+id/tv_video_thumb"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_video_thumb"
+            app:layout_constraintRight_toRightOf="@+id/tv_video_thumb" />
     </android.support.constraint.ConstraintLayout>
 
 
     <TextView
-        android:id="@+id/tv_part_brief"
+        android:id="@+id/tv_video_brief"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="marquee"
@@ -76,5 +76,5 @@
         android:textSize="14sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_part_thumb" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_video_thumb" />
 </LinearLayout>
